@@ -1,0 +1,4 @@
+*.pyc
+*.txt
+*.log
+node_modules/
