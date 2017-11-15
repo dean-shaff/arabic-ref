@@ -1,21 +1,164 @@
-{
-    "time": "َوَقْط",
-    "now": "الأن",
-    "tomorrow": [
-        "غَدَاً",
-        "بُكْرَة"
-    ],
-    "yesterday": "أمْسْ",
-    "then": [
-        "ثَمّ",
-        "بَعَدين"
-    ],
-    "since": "مُنْذُ",
-    "during": "خِلال",
-    "still": "لِسَّة",
-    "before": "قَبْل",
-    "after": "بَعْد",
-    "year": "سَنة",
-    "last": "ماضية",
-    "next": "قادِمة"
-}
+[
+    {
+        "en": "time",
+        "ar": "وَقْط",
+        "example": {
+            "en": [],
+            "ar": []
+        },
+        "category": [
+            "noun",
+            "time"
+        ]
+    },
+    {
+        "en": "now",
+        "ar": "الأن",
+        "example": {
+            "en": [],
+            "ar": []
+        },
+        "category": [
+            "adverb",
+            "time"
+        ]
+    },
+    {
+        "en": "tomorrow",
+        "ar": [
+            "غَدَاً",
+            "بُكْرَة"
+        ],
+        "example": {
+            "en": [],
+            "ar": []
+        },
+        "category": [
+            "noun",
+            "time"
+        ]
+    },
+    {
+        "en": "yesterday",
+        "ar": "أمْسْ",
+        "example": {
+            "en": [],
+            "ar": []
+        },
+        "category": [
+            "noun",
+            "time"
+        ]
+    },
+    {
+        "en": "then",
+        "ar": [
+            "ثَمّ",
+            "بَعَدين"
+        ],
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "time",
+            "adverb"
+        ]
+    },
+    {
+        "en": "since",
+        "ar": "مُنْذُ",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "time",
+            "adverb"
+        ]
+    },
+    {
+        "en": "during",
+        "ar": "خِلال",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "time",
+            "preposition"
+        ]
+    },
+    {
+        "en": "still",
+        "ar": "لِسَّة",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "time",
+            "still"
+        ]
+    },
+    {
+        "en": "before",
+        "ar": "قَبْل",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "time",
+            "preposition"
+        ]
+    },
+    {
+        "en": "after",
+        "ar": "بَعْد",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "time",
+            "preposition"
+        ]
+    },
+    {
+        "en": "year",
+        "ar": "سَنة",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "time",
+            "noun"
+        ]
+    },
+    {
+        "en": "last",
+        "ar": "ماضية",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "time",
+            "adjective"
+        ]
+    },
+    {
+        "en": "next",
+        "ar": "قادِمة",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "time",
+            "adjective"
+        ]
+    }
+]

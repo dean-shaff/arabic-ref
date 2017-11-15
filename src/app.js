@@ -6,8 +6,9 @@ function App(){
     this.setupUI = function(){
         $("#main-widget").append(function(){
             var scrollable = [];
+            var header="h4";
             Object.keys(ar_to_en).forEach(function(e){
-                scrollable.push(`<h3>${e} ${ar_to_en[e]}</h3>`) ;
+                scrollable.push(`<${header}>${e} ${ar_to_en[e]}</${header}>`) ;
             })
             var div = `<div class="scrollable-box">${scrollable.join("")}</div>`;
             return $(div).css("max-height", $(window).height());
