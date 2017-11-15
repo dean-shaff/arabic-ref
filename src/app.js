@@ -8,7 +8,7 @@ function App(){
             var scrollable = [];
             var header="h4";
             Object.keys(ar_to_en).forEach(function(e){
-                scrollable.push(`<${header}>${e} ${ar_to_en[e]}</${header}>`) ;
+                scrollable.push(`<${header}>${e} ${ar_to_en[e]['en']}</${header}>`) ;
             })
             var div = `<div class="scrollable-box">${scrollable.join("")}</div>`;
             return $(div).css("max-height", $(window).height());

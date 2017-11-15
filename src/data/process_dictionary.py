@@ -1,29 +1,37 @@
 import os
 import json
+import uuid
 
 cur_dir = os.path.dirname(os.path.abspath(__file__))
 
 def process_dictionary(in_path, out_path):
     with open(in_path, "r") as f:
         data = json.load(f)
-    reversed_data = {}
-    for en_word in data:
-        ar_word = data[en_word]
-        if not isinstance(ar_word, list):
-            ar_word = [ar_word]
-        for ar in ar_word:
-            if ar in reversed_data:
-                reversed_data[ar] = [reversed_data[ar]]
-                reversed_data[ar].append(en_word)
-            else:
-                reversed_data[ar] = en_word
-    en_to_ar = json.dumps(data)
-    ar_to_en = json.dumps(reversed_data)
+    en_dict = {}
+    index_dict = {}
+    ar_dict = {}
+
+    for entry in data:
+        ar = entry['ar']
+        en = entry['en']
+        unique_id = str(uuid.uuid4())
+        index_dict[unique_id] = {"category":entry['category'], "example":entry["example"]}
+        if not isinstance(ar, list):
+            ar = [ar]
+        if not isinstance(en, list):
+            en = [en]
+
+        for word in ar:
+            ar_dict[word] = {'en':en, "index":unique_id}
+        for word in en:
+            en_dict[word] = {'ar':ar, "index":unique_id}
 
     with open(out_path, "w") as f:
-        f.write("en_to_ar={}".format(en_to_ar))
+        f.write("en_to_ar={}".format(json.dumps(en_dict)))
         f.write("\n")
-        f.write("ar_to_en={}".format(ar_to_en))
+        f.write("ar_to_en={}".format(json.dumps(ar_dict)))
+        f.write("\n")
+        f.write("index={}".format(json.dumps(index_dict)))
 
 
 if __name__ == '__main__':
