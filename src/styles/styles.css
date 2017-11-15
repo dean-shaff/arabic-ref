@@ -1,0 +1,9 @@
+.scrollable-box {
+    height:auto;
+    overflow-y: auto;
+    width:250px;
+}
+
+body {
+    font-family: 'Amiri', serif;
+}

@@ -1,4 +1,4 @@
-/*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+@import url(https://fonts.googleapis.com/css?family=Amiri);/*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 
 /**
  * 1. Set default font family to sans-serif.
@@ -842,4 +842,13 @@ there.
 
 /* Larger than Desktop HD */
 @media (min-width: 1200px) {}
+.scrollable-box {
+    height:auto;
+    overflow-y: auto;
+    width:250px;
+}
+
+body {
+    font-family: 'Amiri', serif;
+}
 
