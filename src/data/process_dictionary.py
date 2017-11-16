@@ -31,7 +31,7 @@ def process_dictionary(in_path, out_path):
         f.write("\n")
         f.write("ar_to_en={}".format(json.dumps(ar_dict)))
         f.write("\n")
-        f.write("index={}".format(json.dumps(index_dict)))
+        f.write("dict_index={}".format(json.dumps(index_dict)))
 
 
 if __name__ == '__main__':

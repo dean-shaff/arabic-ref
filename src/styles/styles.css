@@ -1,7 +1,38 @@
+h5 .tooltip{
+    position: relative;
+    /*display: inline-block;*/
+    /*border-bottom: 1px*/
+}
+
+.tooltip .tooltiptext{
+    visibility: hidden;
+    width: 150px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 1px 10px;
+    border-radius: 5px;
+    position: relative;
+    top: 0px;
+    left: 1%;
+}
+
+
+.tooltip:hover .tooltiptext{
+    visibility: visible;
+}
+
+
+/*A box that will scroll when content is larger
+than the max-height of div */
 .scrollable-box {
     height:auto;
     overflow-y: auto;
     width:250px;
+}
+
+.bottom-spacing {
+    margin-bottom:10px;
 }
 
 body {

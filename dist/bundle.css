@@ -842,13 +842,4 @@ there.
 
 /* Larger than Desktop HD */
 @media (min-width: 1200px) {}
-.scrollable-box {
-    height:auto;
-    overflow-y: auto;
-    width:250px;
-}
-
-body {
-    font-family: 'Amiri', serif;
-}
-
+/*@import "styles/styles.css";*/

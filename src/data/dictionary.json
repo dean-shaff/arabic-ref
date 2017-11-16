@@ -160,5 +160,49 @@
             "time",
             "adjective"
         ]
+    },
+    {
+        "en": "hungry",
+        "ar": "جوعان",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective"
+        ]
+    },
+    {
+        "en": "tired",
+        "ar": "تعبان",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective"
+        ]
+    },
+    {
+        "en": "sleepy",
+        "ar": "نعسان",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective"
+        ]
+    },
+    {
+        "en": "sad",
+        "ar": "زَعَلان",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective"
+        ]
     }
 ]
