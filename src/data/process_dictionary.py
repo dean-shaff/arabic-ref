@@ -16,13 +16,13 @@ def process_dictionary(in_path, out_path):
         en = entry['en']
         unique_id = str(uuid.uuid4())
         index_dict[unique_id] = {"category":entry['category'], "example":entry["example"]}
-        if not isinstance(ar, list):
-            ar = [ar]
+        if not isinstance(ar, dict):
+            ar = {"fos7a":ar}
         if not isinstance(en, list):
             en = [en]
 
-        for word in ar:
-            ar_dict[word] = {'en':en, "index":unique_id}
+        for dialect in ar:
+            ar_dict[ar[dialect]] = {'en':en, "index":unique_id, "dialect":dialect}
         for word in en:
             en_dict[word] = {'ar':ar, "index":unique_id}
 

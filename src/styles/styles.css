@@ -6,20 +6,35 @@ h5 .tooltip{
 
 .tooltip .tooltiptext{
     visibility: hidden;
-    width: 150px;
-    background-color: black;
+    width: auto;
+    background-color: #000;
     color: #fff;
     text-align: center;
-    padding: 1px 10px;
+    padding: 1px 9px;
     border-radius: 5px;
     position: relative;
     top: 0px;
-    left: 1%;
+    right: 0%;
+    opacity: 0;
+    transition: opacity 0.5s;
+    float: left;
 }
 
 
 .tooltip:hover .tooltiptext{
     visibility: visible;
+    opacity: 1;
+}
+
+.tooltip .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 100%; /* To the right of the tooltip */
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent black;
 }
 
 
@@ -29,6 +44,11 @@ than the max-height of div */
     height:auto;
     overflow-y: auto;
     width:250px;
+}
+
+.right-align {
+    text-align: right;
+    padding-right: 15px;
 }
 
 .bottom-spacing {

@@ -9,7 +9,7 @@ function App(){
         $("#word-list").append(function(){
             var scrollable = self.generateWordListHTML(ar_to_en);
             var div = `
-            <div class="scrollable-box">
+            <div class="scrollable-box right-align">
                 <div class="bottom-spacing"></div>
                 ${scrollable.join("")}
             </div>`;
@@ -33,10 +33,6 @@ function App(){
         $(window).on("resize", this.resizeCb(this))
     }
 
-    this.wordListClickCb = function(self){
-
-    }
-
     this.searchKeyDownCb = function(self){
         return function(event){
             var currentVal = $(this).val();
@@ -48,7 +44,7 @@ function App(){
             var htmlMatches = [];
             var header = "h5"
             possibleMatches.forEach(function(e){
-                htmlMatches.push(`<${header}>${e.join(", ")}</${header}>`)
+                htmlMatches.push(`<${header}>${Object.values(e).join(", ")}</${header}>`)
             })
             $("#search-area div").next().html(function(){
                 var div = `
