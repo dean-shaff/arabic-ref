@@ -204,5 +204,162 @@
         "category": [
             "adjective"
         ]
-    }
+    },
+    {
+        "en": "happy",
+        "ar":"سَعيد",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective"
+        ]
+    },
+    {
+        "en": "well",
+        "ar": "بِخير",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective"
+        ]
+    },
+    {
+        "ar": "يَحتاج",
+        "en": "need",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "drink",
+        "ar": "يَشْرَب",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "ask",
+        "ar": "يَسْأل",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "answer",
+        "ar": "يُجيب",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "question",
+        "ar": "سُؤال",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "answer",
+        "ar": "جَواب",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "study",
+        "ar": "يَدْرُس",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "go",
+        "ar": "يَذْهَب",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "price",
+        "ar": "ثَمَن",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "must",
+        "ar": {
+            "fos7a":"يَجِب",
+            "3mia":"لازِم"
+        },
+        "example": {
+            "ar": ["أنا لازماذهب إلىالسق"],
+            "en": ["I must go to the store"]
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "store",
+        "ar": "مَخْزَن",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "",
+        "ar": "",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective"
+        ]
+    },
 ]
