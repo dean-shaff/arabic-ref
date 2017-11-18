@@ -1932,6 +1932,253 @@
         ]
     },
     {
+        "en": "can",
+        "ar": "يَسْتَطتيع",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "eat",
+        "ar": "يأكَل",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "say",
+        "ar": "يَقول",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "speak",
+        "ar": "يَتَكَلَم",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "watch",
+        "ar": "يُشاهِد",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "sleep",
+        "ar": "يَنام",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "explain",
+        "ar": "يَشْرَح",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "order",
+        "ar": "يَطْلَب",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "run",
+        "ar": "يَجْري",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "live",
+        "ar": "يَعْيش",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "arrive",
+        "ar": "يَصِل",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "move",
+        "ar": "يَنْتَقَل",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "return",
+        "ar": "يَعود",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "wake up",
+        "ar": "يَسْتَيْقِظ",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "leave",
+        "ar": "يُغادِر",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "think",
+        "ar": "يَعْتَقِد",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "tell",
+        "ar": "يُخبِر",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "beautiful",
+        "ar": {
+            "fos7a": [
+                "رائعة",
+                "جَميل"
+            ]
+        },
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective"
+        ]
+    },
+    {
+        "en": "kind",
+        "ar": "لَطيفة",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective"
+        ]
+    },
+    {
+        "en": "annoying",
+        "ar": "مَزعَج",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective"
+        ]
+    },
+    {
+        "en": "boring",
+        "ar": "مُمِل",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective"
+        ]
+    },
+    {
+        "en": "thirsty",
+        "ar": "عَطْشان",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective"
+        ]
+    },
+    {
         "en": "",
         "ar": "",
         "example": {
@@ -1939,7 +2186,7 @@
             "en": []
         },
         "category": [
-            "noun"
+            "verb"
         ]
     }
 ]
