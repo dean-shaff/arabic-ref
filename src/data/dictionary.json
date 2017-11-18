@@ -333,7 +333,7 @@
             "3mia":"لازِم"
         },
         "example": {
-            "ar": ["أنا لازماذهب إلىالسق"],
+            "ar": ["أنا لازِم أن أذهب إلى المخزن"],
             "en": ["I must go to the store"]
         },
         "category": [
@@ -352,8 +352,329 @@
         ]
     },
     {
-        "en": "",
-        "ar": "",
+        "en": "books",
+        "ar": "الكُتُب"َ,
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "book",
+        "ar":َ"كِتاب",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "farm",
+        "ar":"مَزْرَعة"َ,
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "meeting",
+        "ar":"إجْتِماع",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "garden",
+        "ar":َ"حَديقة",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "class",
+        "ar":"صَف",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "guest",
+        "ar":"ضَيْف",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en":"friend",
+        "ar":{
+            "fos7a":["صاحِب","صَديق"ِ]
+        },
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "library",
+        "ar":"مَكْتَبة",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "office",
+        "ar":"مَكْتَب",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en":"brother",
+        "ar":"أخ",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "brothers",
+        "ar":"أُخْوة",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "sister",
+        "ar":"أُخْت",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "sisters",
+        "ar":"أَخْوات",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "girl",
+        "ar":"بِنت",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "boy",
+        "ar":"وَلَد",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "girls",
+        "ar":"بَنات",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "boys",
+        "ar":"أَوْلاد",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "children",
+        "ar":"أبْناء",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "age",
+        "ar":"عُمْر",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "water",
+        "ar":"ماء",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "address",
+        "ar":"عَنوان",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "thing",
+        "ar":"شيء",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "respect",
+        "ar":"يَحتَرِم",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "poem",
+        "ar":"قَصيدة",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "poems",
+        "ar":"قَصائد",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en":"doctor",
+        "ar":"طبين",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "student",
+        "ar":"طالِب",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "students",
+        "ar":"طُلاب",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "every",
+        "ar":"كُل",
         "example": {
             "ar": [],
             "en": []
@@ -362,4 +683,1207 @@
             "adjective"
         ]
     },
+    {
+        "en": "questions",
+        "ar":"أسئلة",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "ask",
+        "ar":"يسْأل",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+
+    {
+        "en": "try",
+        "ar":"يُحاوِل",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "give",
+        "ar":"يُعَطي",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "learn",
+        "ar":"يَتَعَلَم",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "reasonable",
+        "ar":"مَتَطَقية",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective"
+        ]
+    },
+    {
+        "en": "smart",
+        "ar":"ذَكية",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective"
+        ]
+    },
+    {
+        "en": "make",
+        "ar":"يَصنع",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "tasty",
+        "ar":"لَدىذ",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective"
+        ]
+    },
+    {
+        "en": "market",
+        "ar":"سُق",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "buy",
+        "ar":"يَشْتَرى",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "because",
+        "ar":"لِأن",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "conjunction"
+        ]
+    },
+    {
+        "en": "because of",
+        "ar":"بِسَبَب",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "conjunction"
+        ]
+    },
+    {
+        "en": "salt",
+        "ar":"مَلْح",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun", "food"
+        ]
+    },
+    {
+        "en": "pepper",
+        "ar":"فُلْفُل",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun", "food"
+        ]
+    },
+    {
+        "en": "mint",
+        "ar":"نَعْنَع",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun", "food"
+        ]
+    },
+    {
+        "en": "bread",
+        "ar":"خُبْز",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun", "food"
+        ]
+    },
+    {
+        "en": "oil",
+        "ar":"زَيْت",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun", "food"
+        ]
+    },
+    {
+        "en": "meat",
+        "ar":"لَحْم",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "tomato",
+        "ar":"طَماطِم",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "fresh",
+        "ar":"طازِج",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective"
+        ]
+    },
+    {
+        "en": "potato",
+        "ar":"بَطاطا",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun", "food"
+        ]
+    },
+    {
+        "en": "coffee",
+        "ar":"قَهْوة",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun", "food"
+        ]
+    },
+    {
+        "en": "milk",
+        "ar":"حَليب",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun", "food"
+        ]
+    },
+    {
+        "en": "juice",
+        "ar":"عَصير",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun","food"
+        ]
+    },
+    {
+        "en": "red",
+        "ar":"أحمَر",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective", "color"
+        ]
+    },
+    {
+        "en": "black",
+        "ar":"أسْوَد",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective", "color"
+        ]
+    },
+    {
+        "en": "white",
+        "ar":"أبْيَض",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective", "color"
+        ]
+    },
+    {
+        "en": "green",
+        "ar":"أخْضَر",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective","color"
+        ]
+    },
+    {
+        "en": "blue",
+        "ar":"أزْرَق",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective", "color"
+        ]
+    },
+    {
+        "en": "yellow",
+        "ar":"أصْفَر",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective", "color"
+        ]
+    },
+    {
+        "en": "cucumber",
+        "ar":"خَيار",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun","food"
+        ]
+    },
+    {
+        "en": "become",
+        "ar":"يُصْبَح",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "swim",
+        "ar":"يَسْبَح",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "real",
+        "ar":"حَقيقي",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective"
+        ]
+    },
+    {
+        "en": "truth",
+        "ar":"حَقيقة",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "weather",
+        "ar":"طَقْس",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "change",
+        "ar":"يَتَغَيْر",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "close",
+        "ar":"يُغَلِق",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "window",
+        "ar":"شُبّاك",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "sit",
+        "ar":"يَجلِس",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "open",
+        "ar":"يَفْتَع",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "continue",
+        "ar":"يَسْتَمِر",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "travel",
+        "ar":"يُسافِر",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "play",
+        "ar":"يَلَعَب",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "teaching",
+        "ar":"تعليم",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "where",
+        "ar":"أينَ",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adverb", "question"
+        ]
+    },
+    {
+        "en": "whose",
+        "ar":"لِمَنْ",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adverb", "question"
+        ]
+    },
+    {
+        "en": "which",
+        "ar":"أي",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adverb", "question"
+        ]
+    },
+    {
+        "en": "to",
+        "ar":"إلى",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "preposition"
+        ]
+    },
+    {
+        "en": "from",
+        "ar":"مِن",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "preposition"
+        ]
+    },
+    {
+        "en": "how",
+        "ar":"كَيْف",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adverb", "question"
+        ]
+    },
+    {
+        "en": "who",
+        "ar":"مَن",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adverb", "question"
+        ]
+    },
+    {
+        "en": "what",
+        "ar":"ماذا",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adverb", "question"
+        ]
+    },
+    {
+        "en": "why",
+        "ar":"لِماذا",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adverb", "question"
+        ]
+    },
+    {
+        "en": "when",
+        "ar":"مَتى",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adverb", "question"
+        ]
+    },
+    {
+        "en": "in",
+        "ar":"في",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "preposition"
+        ]
+    },
+    {
+        "en": "above",
+        "ar":"فَوْقَ",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adverb",
+        ]
+    },
+    {
+        "en": "on",
+        "ar":"على",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "preposition"
+        ]
+    },
+    {
+        "en": "with",
+        "ar":"مَعَ",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "preposition"
+        ]
+    },
+    {
+        "en": "under",
+        "ar":"تَحْتَ",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adverb",
+        ]
+    },
+    {
+        "en": "but",
+        "ar":"لَكِن",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "conjunction"
+        ]
+    },
+    {
+        "en": "help",
+        "ar":"يُساعِد",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "study",
+        "ar":"يَدْرُس",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "know",
+        "ar":"يَعرِف",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "ُunderstand",
+        "ar":"يَفْهَم",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "like",
+        "ar":"يُحِب",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en":["do","work"],
+        "ar":"يَعمَل",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "sing",
+        "ar":"يُغَني",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "verb"
+        ]
+    },
+    {
+        "en": "vocabulary",
+        "ar":"مُفْرَدات",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "song",
+        "ar":"أُغْنية",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "songs",
+        "ar":"أغاني",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "right",
+        "ar":"يَمَين",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun","location"
+        ]
+    },
+    {
+        "en": "ready",
+        "ar":"جاهِز",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective"
+        ]
+    },
+    {
+        "en": "street",
+        "ar":"شارِع",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "building",
+        "ar":"بِناية",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "table",
+        "ar":"طاقِلة",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "chair",
+        "ar":"كُرسي",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "Thursday",
+        "ar":"الخَميس",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "Friday",
+        "ar":"الجُمَعة",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "man",
+        "ar":"رَجُل",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "men",
+        "ar":"رِجال",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "woman",
+        "ar":"إمرأة",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "women",
+        "ar":"مَرة",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "car",
+        "ar":"سيارة",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "story",
+        "ar":"قِصة",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "Saturday",
+        "ar":"السَبْت",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "Sunday",
+        "ar":"الأحِد",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "very",
+        "ar":"جِداً",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adverb"
+        ]
+    },
+    {
+        "en": ["small","young"],
+        "ar":"صَغير",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective"
+        ]
+    },
+    {
+        "en": ["big","old"],
+        "ar":"كَبير",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective"
+        ]
+    },
+    {
+        "en": ["wide","spacious"],
+        "ar":"واسِع",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective"
+        ]
+    },
+    {
+        "en": "close to",
+        "ar":"قَريب مِن",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adverb"
+        ]
+    },
+    {
+        "en": "far from",
+        "ar":"بَعيد مِن",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "far from"
+        ]
+    },
+    {
+        "en": ["tall","long"],
+        "ar":"طَويل",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective"
+        ]
+    },
+    {
+        "en": ["small","short"],
+        "ar":"قَصير",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective"
+        ]
+    },
+    {
+        "en": "sick",
+        "ar":"مَريض",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective"
+        ]
+    },
+    {
+        "en": "crazy",
+        "ar":"مَجْنون",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective"
+        ]
+    },
+    {
+        "en": "hard",
+        "ar":"صَعب",
+        "example": {
+            "ar": ["الإمتِحان كان صعب"],
+            "en": ["The test was hard"]
+        },
+        "category": [
+            "adjective"
+        ]
+    },
+    {
+        "en": "easy",
+        "ar":"سَهْل",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective"
+        ]
+    },
+    {
+        "en": "good",
+        "ar":"جَيِد",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective"
+        ]
+    },
+    {
+        "en": "new",
+        "ar":"جَديد",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective"
+        ]
+    },
+    {
+        "en": "old",
+        "ar":"قَديم",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective"
+        ]
+    },
+    {
+        "en": "excellent",
+        "ar":"مُمتاز",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective"
+        ]
+    },
+    {
+        "en": ["tasty","kind"],
+        "ar":"طَيِب",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "adjective"
+        ]
+    },
+    {
+        "en": "tree",
+        "ar":"شَجَرة",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "cat",
+        "ar":{
+            "fos7a":"قِطة",
+            "3mia":"بِسّة"
+        },
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en": "house",
+        "ar":"بيت",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    },
+    {
+        "en":"",
+        "ar":"",
+        "example": {
+            "ar": [],
+            "en": []
+        },
+        "category": [
+            "noun"
+        ]
+    }
 ]
