@@ -22,7 +22,12 @@ def process_dictionary(in_path, out_path):
             en = [en]
 
         for dialect in ar:
-            ar_dict[ar[dialect]] = {'en':en, "index":unique_id, "dialect":dialect}
+            if not isinstance(ar[dialect], list):
+                dialect_list = [ar[dialect]]
+            else:
+                dialect_list = ar[dialect]
+            for word in dialect_list:
+                ar_dict[word] = {'en':en, "index":unique_id, "dialect":dialect}
         for word in en:
             en_dict[word] = {'ar':ar, "index":unique_id}
 
