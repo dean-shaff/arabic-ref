@@ -1,46 +1,25 @@
-.tooltip{
+.word-list-entry{
+    float: left;
     position: relative;
-    float:left;
     padding: 10px 10px;
 }
 
-.tooltip .tooltiptext{
+.word-list-entry:hover{
+    color: #b82e00;
+}
+
+.word-description{
     visibility: hidden;
-    width: auto;
-    background-color: #000;
-    color: #fff;
-    text-align: center;
-    padding: 1px 9px;
-    border-radius: 5px;
+    border: 1px solid #D1D1D1;
+    border-radius: 4px;
     position: relative;
-    bottom: 30px;
-    right: 10%;
-    opacity: 0;
-    transition: opacity 0.5s;
-    /*float: left;*/
-}
-
-
-.tooltip:hover .tooltiptext{
-    visibility: visible;
-    opacity: 1;
-}
-
-.tooltip .tooltiptext::after {
-    content: " ";
-    position: absolute;
-    top: 100%; /* At the bottom of the tooltip */
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: black transparent transparent transparent;
+    z-index:-1;
+    top:0px;
 }
 
 #word-list{
     border: 1px solid #D1D1D1;
     padding: 25px;
-    /*margin: 25px;*/
     border-radius: 4px;
 }
 
@@ -58,8 +37,6 @@ than the max-height of div */
     overflow-y: auto;
     padding-right: 25px;
 }
-
-
 
 .right-align {
     text-align: right;
