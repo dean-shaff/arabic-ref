@@ -8,10 +8,13 @@ function App(){
         var self = this ;
         $("#word-list").append(function(){
             var scrollable = self.generateWordListHTML(ar_to_en);
+            console.log(scrollable.join(""));
             var div = `
-            <div class="scrollable-box right-align">
+            <div class="scrollable-box-container">
+                <div class="scrollable-box">
                 <div class="bottom-spacing"></div>
                 ${scrollable.join("")}
+            </div>
             </div>`;
             return $(div)
                     .css("max-height", $(window).height())
@@ -22,7 +25,7 @@ function App(){
             var div = `
             <div>
                 <label for="search-input">Search in Arabic or English</label>
-                <input placeholder="type word here..." id="search-input">
+                <input type="search" placeholder="type word here..." id="search-input">
             </div>
             <div></div>
             `
@@ -66,9 +69,8 @@ function App(){
         var scrollable = [];
         Object.keys(dictionary).forEach(function(e){
             scrollable.push(
-            `<h5 class="tooltip">${e} ${dictionary[e]['en']}
-                <span class="tooltiptext">${dict_index[dictionary[e]["index"]]["category"]}</span>
-            </h5>`) ;
+            // `<span class="tooltip">${e} ${dictionary[e]['en']}<span class="tooltiptext">${dict_index[dictionary[e]["index"]]["category"]}</span></span>`) ;
+            `<span class="tooltip"><h5>${dictionary[e]['en']} | ${e}</h5></span>`) ;
         })
         return scrollable
     }
