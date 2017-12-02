@@ -1,20 +1,17 @@
+
+button{
+    text-transform: none;
+}
+
 .word-list-entry{
     float: left;
     position: relative;
-    padding: 10px 10px;
+    padding: 0px 10px;
+    font-size: 1.8rem;
 }
 
 .word-list-entry:hover{
     color: #b82e00;
-}
-
-.word-description{
-    visibility: hidden;
-    border: 1px solid #D1D1D1;
-    border-radius: 4px;
-    position: relative;
-    z-index:-1;
-    top:0px;
 }
 
 #word-list{
@@ -53,4 +50,34 @@ than the max-height of div */
 
 body {
     font-family: 'Amiri', serif;
+}
+
+/*Tooltip: A hidden element that appears when additional information is requested.*/
+.tooltip{
+    /*float: left;*/
+    /*border: 1px solid #D1D1D1;*/
+    /*border-radius: 4px;*/
+    position: relative;
+    width:100%;
+}
+
+.tooltip.closed{
+    float: none;
+    margin: 0;
+    max-height: 0;
+    padding: 0;
+    overflow-y: hidden;
+    opacity: 0 ;
+    transition: all 0.4s ease-in-out;
+}
+
+.tooltip.open{
+    float:left;
+    height:100% ;
+    margin: 1rem 1rem;
+    padding: 1rem 1rem;
+    max-height: 200px;
+    opacity: 1 ;
+    overflow-y: visible;
+    transition: all 0.4s ease-in-out;
 }

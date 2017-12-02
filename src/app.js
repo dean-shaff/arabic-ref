@@ -5,22 +5,13 @@ function App(){
     }
 
     this.setupUI = function(){
+        this.setupWordList()
+        this.setupSearchBox()
+        $(window).on("resize", this.resizeCb(this))
+    }
+
+    this.setupSearchBox = function(){
         var self = this ;
-        $("#word-list").append(function(){
-            var scrollable = self.generateWordListHTML(ar_to_en);
-            var div = `
-            <div class="scrollable-box-container">
-                <div class="scrollable-box">
-                <div id="word-list-contents">
-                ${scrollable.join("")}
-                </div>
-            </div>
-            </div>`;
-            return $(div)
-                    .css("max-height", $(window).height())
-                    .css("width",$("#word-list").width());
-        })
-        $("#word-list-contents").on("click",".word-list-entry", this.wordListClickCb(this));
         $("#search-area").append(function(){
             var div = `
             <div>
@@ -33,25 +24,77 @@ function App(){
         })
         $("#search-area").on("keyup", "div input#search-input",this.searchKeyDownCb(this))
 
-        $(window).on("resize", this.resizeCb(this))
     }
 
+    this.setupWordList = function(){
+        var self = this ;
+        $("#word-list").html(()=>{
+            var scrollable = self.generateWordListHTML(ar_to_en);
+            var div = util.generateScrollableBox(scrollable, {id:"word-list-contents"})()
+            return $(div)
+                    .css("max-height", $(window).height())
+                    .css("width",$("#word-list").width());
+        })
+        $("#word-list-contents").on("click",".word-list-entry", this.wordListClickCb(this));
+    }
+
+
     this.wordListClickCb = function(self){
-        return function(){
-            var wordText = $(this).find("h5").html().split(" | ");
-            var en_word = wordText[0];
-            var ar_word = wordText[1];
-            $("#word-decription").html(function(){
-                var html = "";
+        return (event)=>{
+
+            var generateDescriptionHTML = ()=>{
+                var wordText = $(event.currentTarget).html().split(" | ");
+                var [en_word, ar_word] = wordText;
                 var arabic = en_to_ar[en_word]['ar'];
-                html += `<h5>${en_word}</h5>`;
+                html = `<h5>${en_word}</h5>`;
                 var fos7a = arabic['fos7a'];
                 html += `<h5> فصحى : ${fos7a}</h5>`
                 if ("3mia" in arabic){
                     html += `<h5>عامية : ${arabic['3mia']}</h5>`;
                 }
-                return $(html);
-            })
+                return html;
+            }
+
+            var descripDivName = "word-description"
+
+            var generateNewDescription = ()=>{
+                $(event.currentTarget).after(
+                    util.generateToolTip(`${generateDescriptionHTML()}`,{id:"word-description",class:"closed"})
+                )
+                setTimeout(()=>{
+                    $(`#${descripDivName}`).toggleClass("open closed");
+                },50);
+            }
+
+            var removeCurrentDescription = ()=>{
+                $(`#${descripDivName}`).toggleClass("open closed")
+                setTimeout(()=>{
+                    $(`#${descripDivName}`).remove()
+                },400)
+            }
+
+            if ($(`#${descripDivName}`).length){
+                var prev = $(`#${descripDivName}`).prev()
+                if (prev.is($(event.currentTarget))){
+                    removeCurrentDescription()
+                }else{
+                    removeCurrentDescription()
+                    generateNewDescription()
+                }
+            }else{
+                generateNewDescription()
+            }
+            // $("#word-decription").html(function(){
+            //     var html = "";
+            //     var arabic = en_to_ar[en_word]['ar'];
+            //     html += `<h5>${en_word}</h5>`;
+            //     var fos7a = arabic['fos7a'];
+            //     html += `<h5> فصحى : ${fos7a}</h5>`
+            //     if ("3mia" in arabic){
+            //         html += `<h5>عامية : ${arabic['3mia']}</h5>`;
+            //     }
+            //     return $(html);
+            // })
         }
     }
 
@@ -94,8 +137,7 @@ function App(){
             } else if ("ar" in dictionary[e]){
                 contents = `${e} | ${Object.values(dictionary[e]['ar']).join(", ")}`;
             }
-            scrollable.push(
-            `<span class="word-list-entry"><h5>${contents}</h5></span><div class="word-description"></div>`) ;
+            scrollable.push(util.generateWordEntry(contents)()) ;
         })
         return scrollable
     }
