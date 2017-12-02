@@ -8,10 +8,14 @@ button{
     position: relative;
     padding: 0px 10px;
     font-size: 1.8rem;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
 }
 
 .word-list-entry:hover{
     color: #b82e00;
+    /*border-color: #b82e00;*/
+    transition: all 0.4s ease-in-out;
 }
 
 #word-list{

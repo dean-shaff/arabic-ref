@@ -29,7 +29,7 @@ function App(){
     this.setupWordList = function(){
         var self = this ;
         $("#word-list").html(()=>{
-            var scrollable = self.generateWordListHTML(ar_to_en);
+            var scrollable = self.generateWordListHTML(__ar_to_en__);
             var div = util.generateScrollableBox(scrollable, {id:"word-list-contents"})()
             return $(div)
                     .css("max-height", $(window).height())
@@ -41,18 +41,36 @@ function App(){
 
     this.wordListClickCb = function(self){
         return (event)=>{
-
             var generateDescriptionHTML = ()=>{
                 var wordText = $(event.currentTarget).html().split(" | ");
                 var [en_word, ar_word] = wordText;
-                var arabic = en_to_ar[en_word]['ar'];
-                html = `<h5>${en_word}</h5>`;
+                var arabic = __en_to_ar__[en_word]['ar'];
+                html = [`<h5>${en_word}</h5>`];
                 var fos7a = arabic['fos7a'];
-                html += `<h5> فصحى : ${fos7a}</h5>`
+                html.push(`<h5> فصحى : ${fos7a}</h5>`);
                 if ("3mia" in arabic){
-                    html += `<h5>عامية : ${arabic['3mia']}</h5>`;
+                    html.push(`<h5>عامية : ${arabic['3mia']}</h5>`);
                 }
-                return html;
+                var index = __en_to_ar__[en_word].index;
+                var keywords = __dict_index__[index].category
+                var examples = __dict_index__[index].example
+                if (keywords.length != 0){
+                    html.push("<b>keywords: </b>")
+                    html.push(`${keywords.join(", ")}`)
+                    html.push("<div></div>")
+                }
+                exampleText = ["<b>Examples: </b><div></div>"];
+                ["ar", "en"].forEach((lang)=>{
+                    if (examples[lang].length != 0){
+                        exampleText.push(`${lang}: `)
+                        exampleText.push(examples[lang].join(", "))
+                    }
+                    exampleText.push("<div></div>")
+                })
+                if (exampleText.length > 3){
+                    html.push(exampleText.join(""))
+                }
+                return html.join("");
             }
 
             var descripDivName = "word-description"
@@ -86,7 +104,7 @@ function App(){
             }
             // $("#word-decription").html(function(){
             //     var html = "";
-            //     var arabic = en_to_ar[en_word]['ar'];
+            //     var arabic = __en_to_ar__[en_word]['ar'];
             //     html += `<h5>${en_word}</h5>`;
             //     var fos7a = arabic['fos7a'];
             //     html += `<h5> فصحى : ${fos7a}</h5>`
@@ -103,7 +121,7 @@ function App(){
             var currentVal = $(this).val().toLowerCase();
             var scrollable ;
             if (currentVal == ""){
-                scrollable = self.generateWordListHTML(ar_to_en);
+                scrollable = self.generateWordListHTML(__ar_to_en__);
                 console.log(scrollable);
                 $("#word-list-contents").html(`${scrollable.join("")}`);
                 return;
@@ -159,8 +177,8 @@ function App(){
         }
         // Now apply searchDictionary to the english -> Arabic and Arabic -> English
         // dictionaries:
-        searchDictionary(ar_to_en);
-        searchDictionary(en_to_ar);
+        searchDictionary(__ar_to_en__);
+        searchDictionary(__en_to_ar__);
         return possibleMatches;
     }
 }
