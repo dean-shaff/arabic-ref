@@ -85,3 +85,13 @@ body {
     overflow-y: visible;
     transition: all 0.4s ease-in-out;
 }
+
+
+.float-row{
+    position: relative;
+    float:left;
+    width:100%;
+    margin-top:1rem;
+    margin-bottom: 1rem;
+    /*overflow-y: visible;*/
+}

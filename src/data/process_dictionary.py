@@ -10,13 +10,16 @@ def process_dictionary(in_path, out_path):
     en_dict = {}
     index_dict = {}
     ar_dict = {}
-    keywords = []
+    keyword_dict = {}
     for entry in data:
         ar = entry['ar']
         en = entry['en']
         unique_id = str(uuid.uuid4())
-        index_dict[unique_id] = {"category":entry['category'], "example":entry["example"]}
-        keywords.extend(entry["category"])
+        index_dict[unique_id] = entry
+        for cat in entry["category"]:
+            if cat not in keyword_dict:
+                keyword_dict[cat] = []
+            keyword_dict[cat].append(unique_id)
         if not isinstance(ar, dict):
             ar = {"fos7a":ar}
         if not isinstance(en, list):
@@ -31,13 +34,11 @@ def process_dictionary(in_path, out_path):
                 ar_dict[word] = {'en':en, "index":unique_id, "dialect":dialect}
         for word in en:
             en_dict[word] = {'ar':ar, "index":unique_id}
-    unique_keywords = list(set(keywords))
     with open(out_path, "w") as f:
         f.write("__en_to_ar__={}\n".format(json.dumps(en_dict)))
         f.write("__ar_to_en__={}\n".format(json.dumps(ar_dict)))
         f.write("__dict_index__={}\n".format(json.dumps(index_dict)))
-        f.write("__keywords__={}\n".format(json.dumps(unique_keywords)))
-
+        f.write("__keywords__={}\n".format(json.dumps(keyword_dict)))
 
 if __name__ == '__main__':
     process_dictionary(os.path.join(cur_dir, "dictionary.json"),

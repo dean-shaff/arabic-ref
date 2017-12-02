@@ -29,8 +29,9 @@ function App(){
     this.setupWordList = function(){
         var self = this ;
         $("#word-list").html(()=>{
-            var scrollable = self.generateWordListHTML(__ar_to_en__);
-            var div = util.generateScrollableBox(scrollable, {id:"word-list-contents"})()
+            // var contents = self.generateWordListHTML(__ar_to_en__);
+            var contents = self.generateWordListHTMLByKeyword();
+            var div = util.generateScrollableBox(contents(), {id:"word-list-contents"})()
             return $(div)
                     .css("max-height", $(window).height())
                     .css("width",$("#word-list").width());
@@ -141,7 +142,7 @@ function App(){
 
 
     /**
-     * @function generateWordListHTML
+     * Given some dictionary, generate HTML for the words in the dictionary.
      * @param  {Array or Object} dictionary
      * An array or Object containing words of interest
      * @return {Array}            [HTML formatted words]
@@ -159,6 +160,30 @@ function App(){
         })
         return scrollable
     }
+
+    /**
+     * Using the __keywords__ global variable, generate HTML for words,
+     * under category/keyword headers
+     * @return {function} - function that returns HTML
+     */
+    this.generateWordListHTMLByKeyword = function(){
+        return () => {
+            var html = [];
+            Object.keys(__keywords__).forEach((keyword)=>{
+                var wordList = __keywords__[keyword] // This is list of indices.
+                html.push(`<div class="float-row"><h4>${keyword}</h4></div>`)
+                wordList.forEach((index)=>{
+                    var entry = __dict_index__[index]
+                    var en = entry.en
+                    var ar = entry.ar
+                    html.push(util.generateWordEntry(en)());
+                })
+                html.push(`<div class="float-row"></div>`)
+            })
+            return html;
+        }
+    }
+
 
     /**
      * @function searchDictionary
