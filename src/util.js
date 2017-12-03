@@ -24,9 +24,15 @@ function Util(){
      */
     this.generateDropDown = function(contents, options){
         options = this.processOptions(options)
+        if ("labelText" in options){
+            options.label = `<label>${options.labelText}</label>`
+        }else{
+            options.label=`<label></label>`
+        }
         return () => {
             var div = [`<div class="u-full-width dropdown ${options.class}" ${options.idAttr}>
                     <div>
+                        ${options.label}
                         <div class="button dropdown-display"><span></span></div>
                         <button type="button"><span></span></button>
                     </div>`];
@@ -61,6 +67,26 @@ function Util(){
                 </div>
             </div>
             </div>`;
+        }
+    }
+
+    this.generateLabeledInput = function(labelText, inputParams, options){
+        options = this.processOptions(options)
+        if (inputParams.placeholder == null){
+            inputParams.placeholder = ""
+        }
+        if (inputParams.value == null){
+            inputParams.value = ""
+        }
+        return () => {
+            return `<label>${labelText}</label>
+                    <input type="search" placeholder="${inputParams.placeholder}" value="${inputParams.value}" ${options.idAttr}>`
+        }
+    }
+
+    this.generatePlusButton = function(){
+        return ()=>{
+            return `<button class="plus-button"><span>${octicons.plus.toSVG()}</span></button>`
         }
     }
 

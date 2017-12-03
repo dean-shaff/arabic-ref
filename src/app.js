@@ -16,22 +16,16 @@ function App(){
         this.setupWordList()
         this.setupSearchBox()
         this.setupFontDropDown()
+        this.setupAddWord()
         $(window).on("resize", this.resizeCb(this))
     }
 
     this.setupSearchBox = function(){
         var self = this ;
-        $("#search-area").append(function(){
-            var div = `
-            <div>
-                <label for="search-input">Search in Arabic or English</label>
-                <input type="search" placeholder="type word here..." id="search-input">
-            </div>
-            <div id="word-decription"></div>
-            `
-            return $(div);
-        })
-        $("#search-area").on("keyup", "div input#search-input",this.searchKeyDownCb(this))
+        $("#search-input-container").append(util.generateLabeledInput("",
+                                                            {placeholder:"Search in Arabic or English..."},
+                                                            {id:"search-input"}))
+        $("#search-input-container").on("keyup", "input#search-input",this.searchKeyDownCb(this))
 
     }
 
@@ -53,21 +47,23 @@ function App(){
         Object.keys(this.fonts).forEach((font)=>{
             fonts.push([font, this.fonts[font].slice(0,2).join(", ")])
         })
-        var dropdown = util.generateDropDown(fonts,{id:"font-dropdown"})
-        $("#top-bar .four").html(`<div class="row">
-            <div class="four columns">
-                <label class="inline">Choose Font</label>
-            </div>
-            <div class="eight columns">
+        var dropdown = util.generateDropDown(fonts,{id:"font-dropdown",labelText:"Choose Font"})
+        $("#top-bar .columns").last().html(`
+            <div class="row">
+            <div class="twelve columns">
                 ${dropdown()}
             </div>
         </div>`)
         util.dropDownSetup.call($("#font-dropdown"),{callback:this.changeFontCb(this)})
     }
 
+    this.setupAddWord = function(){
+        $("#add-word").append(util.generatePlusButton({id:"add-word-button"}))
+        $("#add-word-button").on("click", this.addWordCb(this))
+    }
+
     this.wordListClickCb = function(self){
         return (event)=>{
-            console.log("Clicked")
             var generateDescriptionHTML = ()=>{
                 var wordText = $(event.currentTarget).find("span").html().split(" | ");
                 var [en_word, ar_word] = wordText;
@@ -167,6 +163,12 @@ function App(){
                 $(".word-list-entry span").css(font[3])
             }
 
+        }
+    }
+
+    this.addWordCb = function(self){
+        return (event) => {
+            // $(event.currentTarget).after(util.generateHoverToolTip())
         }
     }
 
