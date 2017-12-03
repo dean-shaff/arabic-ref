@@ -85,10 +85,13 @@ function App(){
                 },50);
             }
 
-            var removeCurrentDescription = ()=>{
+            var removeCurrentDescription = (callback)=>{
                 $(`#${descripDivName}`).toggleClass("open closed")
                 setTimeout(()=>{
                     $(`#${descripDivName}`).remove()
+                    if (callback != null){
+                        callback()
+                    }
                 },400)
             }
 
@@ -97,8 +100,7 @@ function App(){
                 if (prev.is($(event.currentTarget))){
                     removeCurrentDescription()
                 }else{
-                    removeCurrentDescription()
-                    generateNewDescription()
+                    removeCurrentDescription(generateNewDescription)
                 }
             }else{
                 generateNewDescription()
