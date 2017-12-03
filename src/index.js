@@ -1,1 +1,2 @@
-window.jQuery = $ = require("jquery");
+window.jQuery = $ = require("jquery")
+window.octicons = require("octicons")

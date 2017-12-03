@@ -1,4 +1,10 @@
 function App(){
+    this.fonts = {
+        "amiri": ["Amiri", "serif"],
+        "raleway": ["Raleway", "sans-serif"]
+    }
+
+
     this.init = function(){
         this.setupUI();
         this.resizeCb(this)();
@@ -7,6 +13,7 @@ function App(){
     this.setupUI = function(){
         this.setupWordList()
         this.setupSearchBox()
+        this.setupFontDropDown()
         $(window).on("resize", this.resizeCb(this))
     }
 
@@ -39,6 +46,21 @@ function App(){
         $("#word-list-contents").on("click",".word-list-entry", this.wordListClickCb(this));
     }
 
+    this.setupFontDropDown = function(){
+        var dropdown = util.generateDropDown([
+                    ["amiri", "Amiri, serif"],
+                    ["raleway", "Raleway, sans-serif"]
+                ],{id:"font-dropdown"})
+        $("#top-bar .four").html(`<div class="row">
+            <div class="four columns">
+                <label>Choose Font</label>
+            </div>
+            <div class="eight columns">
+                ${dropdown()}
+            </div>
+        </div>`)
+        util.dropDownSetup.call($("#font-dropdown"),{callback:this.changeFontCb(this)})
+    }
 
     this.wordListClickCb = function(self){
         return (event)=>{
@@ -76,12 +98,15 @@ function App(){
 
             var descripDivName = "word-description"
 
-            var generateNewDescription = ()=>{
+            var generateNewDescription = (callback)=>{
                 $(event.currentTarget).after(
                     util.generateToolTip(`${generateDescriptionHTML()}`,{id:"word-description",class:"closed"})
                 )
                 setTimeout(()=>{
                     $(`#${descripDivName}`).toggleClass("open closed");
+                    if (callback != null){
+                        callback()
+                    }
                 },50);
             }
 
@@ -105,17 +130,6 @@ function App(){
             }else{
                 generateNewDescription()
             }
-            // $("#word-decription").html(function(){
-            //     var html = "";
-            //     var arabic = __en_to_ar__[en_word]['ar'];
-            //     html += `<h5>${en_word}</h5>`;
-            //     var fos7a = arabic['fos7a'];
-            //     html += `<h5> فصحى : ${fos7a}</h5>`
-            //     if ("3mia" in arabic){
-            //         html += `<h5>عامية : ${arabic['3mia']}</h5>`;
-            //     }
-            //     return $(html);
-            // })
         }
     }
 
@@ -124,14 +138,23 @@ function App(){
             var currentVal = $(this).val().toLowerCase();
             var scrollable ;
             if (currentVal == ""){
-                scrollable = self.generateWordListHTML(__ar_to_en__);
-                console.log(scrollable);
-                $("#word-list-contents").html(`${scrollable.join("")}`);
+                // contents = self.generateWordListHTML(__ar_to_en__);
+                // $("#word-list-contents").html(`${contents.join("")}`);
+                contentCallback = self.generateWordListHTMLByKeyword();
+                $("#word-list-contents").html(contentCallback);
                 return;
             }
             var possibleMatches = self.searchDictionary(currentVal);
-            scrollable = self.generateWordListHTML(possibleMatches);
-            $("#word-list-contents").html(`${scrollable.join("")}`);
+            contents = self.generateWordListHTML(possibleMatches);
+            $("#word-list-contents").html(`${contents.join("")}`);
+        }
+    }
+
+    this.changeFontCb = function(self){
+        return (event)=>{
+            var currentVal = $(event.currentTarget).attr("value");
+            var font = self.fonts[currentVal];
+            $("body").css("font-family", font[0])
         }
     }
 
@@ -169,6 +192,39 @@ function App(){
      * @return {function} - function that returns HTML
      */
     this.generateWordListHTMLByKeyword = function(){
+
+        var arabicEnglishWordPair = (entry) => {
+            var en = entry.en
+            var ar = entry.ar
+            // Process English first
+            if (en.constructor == String){
+                enReturn = en
+            } else if (en.constructor == Array){
+                enReturn = en.join(", ")
+            }
+            // Arabic is generally a little trickier because there
+            // migth be fos7a and 3mia entries
+            if (ar.constructor == String){
+                arReturn = ar
+            }else if (ar.constructor == Object){
+                arReturn = [];
+                if ("fos7a" in ar){
+                    if (ar.fos7a.constructor == Array){
+                        arReturn.push(ar.fos7a.join(", "))
+                    }else{
+                        arReturn.push(ar.fos7a)
+                    }
+                }
+                if ("3mia" in ar){
+                    arReturn.push(ar["3mia"])
+                }
+                arReturn = arReturn.join(", ")
+            }
+
+            return `${enReturn} | ${arReturn}`
+        }
+
+
         return () => {
             var html = [];
             Object.keys(__keywords__).forEach((keyword)=>{
@@ -176,9 +232,7 @@ function App(){
                 html.push(`<div class="float-row"><h4>${keyword}</h4></div>`)
                 wordList.forEach((index)=>{
                     var entry = __dict_index__[index]
-                    var en = entry.en
-                    var ar = entry.ar
-                    html.push(util.generateWordEntry(en)());
+                    html.push(util.generateWordEntry(arabicEnglishWordPair(entry))());
                 })
                 html.push(`<div class="float-row"></div>`)
             })
