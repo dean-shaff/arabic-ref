@@ -1,15 +1,21 @@
 
 button{
     text-transform: none;
+    font-weight: 400;
 }
 
 .word-list-entry{
     float: left;
-    position: relative;
-    padding: 0px 10px;
+    padding-right: 10px;
+    padding-left: 10px;
     font-size: 1.8rem;
     margin-right: 0.5rem;
     margin-left: 0.5rem;
+    position: relative;
+}
+
+.word-list-entry span{
+    position: relative;
 }
 
 .word-list-entry:hover{
@@ -101,6 +107,7 @@ body {
 .dropdown {
     position: relative;
     display: inline-block;
+    margin-top: 0.5rem;
 }
 
 /*Define the styling of the display area to the left of the dropdown button */
@@ -112,6 +119,7 @@ body {
     border-right-style:none;
     text-transform: none;
     width: 85%;
+    overflow-x: hidden;
     text-align: left;
     padding: 0px 10px;
 }
@@ -172,3 +180,9 @@ body {
 
 /* Change color of dropdown links on hover */
 .dropdown-content div:hover {background-color: #f1f1f1}
+
+
+label.inline{
+    margin-top: 1.3rem;
+    margin-bottom: 0rem;
+}

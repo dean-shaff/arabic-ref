@@ -67,7 +67,7 @@ function Util(){
     this.generateWordEntry = function(content, options){
         options = this.processOptions(options)
         return ()=>{
-            return `<button ${options.idAttr} class="word-list-entry">${content}</button>`
+            return `<button ${options.idAttr} class="word-list-entry"><span>${content}</span></button>`
         }
     }
 
@@ -77,7 +77,7 @@ function Util(){
             return `<div class="tooltip ${options.class}" ${options.idAttr}>${content}</div>`
         }
     }
-    
+
     /**
      * @function dropDownSetup
      * setup a dropdown div

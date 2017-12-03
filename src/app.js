@@ -1,9 +1,11 @@
 function App(){
     this.fonts = {
-        "amiri": ["Amiri", "serif"],
-        "raleway": ["Raleway", "sans-serif"]
+        "amiri": ["Amiri", "serif", {"height":"38px"}, {"bottom":"0px"}],
+        "raleway": ["Raleway", "sans-serif", {"height":"38px"}, {"bottom":"0px"}],
+        "noto-kannada":["Noto Sans Kannada", "sans-serif", {"height":"38px"}, {"bottom":"0px"}],
+        "noto-urdu": ["Noto Nastaliq Urdu", "serif", {"height":"48px"}, {"bottom":"4px"}],
+        "noto-kufi": ["Noto Kufi Arabic", "sans-serif", {"height":"38px"}, {"bottom":"0px"}]
     }
-
 
     this.init = function(){
         this.setupUI();
@@ -47,13 +49,14 @@ function App(){
     }
 
     this.setupFontDropDown = function(){
-        var dropdown = util.generateDropDown([
-                    ["amiri", "Amiri, serif"],
-                    ["raleway", "Raleway, sans-serif"]
-                ],{id:"font-dropdown"})
+        fonts = [] ;
+        Object.keys(this.fonts).forEach((font)=>{
+            fonts.push([font, this.fonts[font].slice(0,2).join(", ")])
+        })
+        var dropdown = util.generateDropDown(fonts,{id:"font-dropdown"})
         $("#top-bar .four").html(`<div class="row">
             <div class="four columns">
-                <label>Choose Font</label>
+                <label class="inline">Choose Font</label>
             </div>
             <div class="eight columns">
                 ${dropdown()}
@@ -64,8 +67,9 @@ function App(){
 
     this.wordListClickCb = function(self){
         return (event)=>{
+            console.log("Clicked")
             var generateDescriptionHTML = ()=>{
-                var wordText = $(event.currentTarget).html().split(" | ");
+                var wordText = $(event.currentTarget).find("span").html().split(" | ");
                 var [en_word, ar_word] = wordText;
                 var arabic = __en_to_ar__[en_word]['ar'];
                 html = [`<h5>${en_word}</h5>`];
@@ -154,7 +158,15 @@ function App(){
         return (event)=>{
             var currentVal = $(event.currentTarget).attr("value");
             var font = self.fonts[currentVal];
-            $("body").css("font-family", font[0])
+            console.log(`Changing font to ${font}`)
+            $("body").css("font-family", font[0], font[1])
+            if (font[2] != null){
+                $(".word-list-entry").css(font[2])
+            }
+            if (font[3] != null){
+                $(".word-list-entry span").css(font[3])
+            }
+
         }
     }
 
