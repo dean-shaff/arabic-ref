@@ -22,8 +22,7 @@ function App(){
 
     this.setupSearchBox = function(){
         var self = this ;
-        $("#search-input-container").append(util.generateLabeledInput("",
-                                                            {placeholder:"Search in Arabic or English..."},
+        $("#search-input-container").append(util.generateLabeledInput("","Search in Arabic or English...","",
                                                             {id:"search-input"}))
         $("#search-input-container").on("keyup", "input#search-input",this.searchKeyDownCb(this))
 
@@ -63,9 +62,9 @@ function App(){
     }
 
     this.wordListClickCb = function(self){
-        return (event)=>{
+        return (eventObject)=>{
             var generateDescriptionHTML = ()=>{
-                var wordText = $(event.currentTarget).find("span").html().split(" | ");
+                var wordText = $(eventObject.currentTarget).find("span").html().split(" | ");
                 var [en_word, ar_word] = wordText;
                 var arabic = __en_to_ar__[en_word]['ar'];
                 html = [`<h5>${en_word}</h5>`];
@@ -99,7 +98,7 @@ function App(){
             var descripDivName = "word-description"
 
             var generateNewDescription = (callback)=>{
-                $(event.currentTarget).after(
+                $(eventObject.currentTarget).after(
                     util.generateToolTip(`${generateDescriptionHTML()}`,{id:"word-description",class:"closed"})
                 )
                 setTimeout(()=>{
@@ -122,7 +121,7 @@ function App(){
 
             if ($(`#${descripDivName}`).length){
                 var prev = $(`#${descripDivName}`).prev()
-                if (prev.is($(event.currentTarget))){
+                if (prev.is($(eventObject.currentTarget))){
                     removeCurrentDescription()
                 }else{
                     removeCurrentDescription(generateNewDescription)
@@ -134,8 +133,8 @@ function App(){
     }
 
     this.searchKeyDownCb = function(self){
-        return function(event){
-            var currentVal = $(this).val().toLowerCase();
+        return (eventObject)=>{
+            var currentVal = $(eventObject.currentTarget).val().toLowerCase();
             var scrollable ;
             if (currentVal == ""){
                 // contents = self.generateWordListHTML(__ar_to_en__);
@@ -168,7 +167,8 @@ function App(){
 
     this.addWordCb = function(self){
         return (event) => {
-            // $(event.currentTarget).after(util.generateHoverToolTip())
+            $(event.currentTarget).after(util.generateToolTip(
+            ))
         }
     }
 

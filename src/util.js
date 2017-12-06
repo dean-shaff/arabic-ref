@@ -1,19 +1,60 @@
 function Util(){
 
+    /**
+     * If a string is passed, return $(string),
+     * otherwise return the selector itself
+     * @type {String/Object} selector -
+     * @returns {Object} - JQuery selector
+     */
+    this.process$ = function(selector){
+        if (selector.constructor == String){
+            return $(selector)
+        }else{
+            return selector
+        }
+
+    }
+
     this.processOptions = function(options){
         if (options == null){
-            options = {}
+            options = {};
         }
         if ("id" in options){
-            options.idAttr = `id=${options.id}`
+            options.idAttr = `id="${options.id}"`
         }else{
             options.idAttr = ""
         }
-        if (!("class" in options)){
-            options.class = ""
+        if ("forId" in options){
+            options.forIdAttr = `for=${options.forId}`
+        }else{
+            options.forIdAttr = ""
         }
-        return options
+        if (!("class" in options)){
+            options.class = "";
+        }
+        return options;
     }
+
+    this.generateCheckBoxList = function(contents, options){
+        options = this.processOptions(options)
+        return () => {
+            var div = [];
+            contents.forEach((content)=>{
+                var [display, id] = content ;
+                if (id == null){
+                    idAttr = ""
+                }else{
+                    idAttr = `id=${id}`
+                }
+                div.push(`<label>
+                    <input ${idAttr} type="checkbox">
+                    <span>${display}<span>
+                </label>`)
+            })
+            return div.join("")
+        }
+    }
+
 
     /**
      * generate a drop down div, with some content.
@@ -50,6 +91,104 @@ function Util(){
     }
 
 
+    this.generateDropDownRow = function(content, options){
+        options = this.processOptions(options)
+        return () => {
+            return `<div class="dropdown-element" value=${content[0]}>${content[1]}</div>`
+        }
+    }
+
+    /**
+     * [description]
+     * @param  {[type]} content [description]
+     * @param  {[type]} options [description]
+     * @return {[type]}         [description]
+     */
+    this.generateTooltip = function(content, options){
+        options = this.processOptions(options);
+        return ()=>{return `<div class="tooltip ${options.class}" ${options.idAttr}>${content()}</div>`}
+    }
+
+    this.generateLabel = function(labelText, options){
+        options = this.processOptions(options);
+        if (labelText == null){
+            labelText = `<span class="placeholder"></span>`;
+        }
+        if ("span" in options){
+            labelText += `<span>${options.span()}</span>`
+        }
+        return ()=>{return `<label ${options.idAttr} ${options.forIdAttr}>${labelText}</label>`}
+    }
+
+    this.generateRowInput = function(placeholder, value, options){
+        options = this.processOptions(options)
+        return ()=>{return`<input ${options.idAttr} class="u-full-width sched-input" placeholder="${placeholder}" value="${value}" type="text">`}
+    }
+
+    this.generateLabeledInput = function(labelText, placeholder, value, options){
+        optionsInput = {}
+        optionsLabel = {}
+        Object.keys(options).forEach((key)=>{
+            optionsInput[key] = options[key]
+            if (key != "id"){
+                optionsLabel[key] = options[key]
+            }
+        })
+        return () => {
+            var input = this.generateRowInput(placeholder, value, optionsInput)
+            var label = this.generateLabel(labelText, optionsLabel)
+            return label() + input()
+        }
+    }
+
+    this.generatePlusButton = function(options){
+        options = this.processOptions(options)
+        return ()=>{return `<button ${options.idAttr} class="plus-button ${options.class}"><span>${octicons.plus.toSVG()}</span></button>`
+        }
+    }
+
+    this.generateXButton = function(options){
+        options = this.processOptions(options)
+        return ()=>{return `<button ${options.idAttr} type="button" class="button-row button-x ${options.class}">${octicons.x.toSVG()}</button>`
+        }
+    }
+
+    this.generateKebabButton = function(options){
+        options = this.processOptions(options)
+        return ()=>{return `<button ${options.idAttr} type="button" class="button-row button-kebab ${options.class}">${octicons["kebab-vertical"].toSVG()}</button>`}
+    }
+
+    this.generateQuestionButton = function(options){
+        options = this.processOptions(options)
+        if ("link" in options){
+            options.linkAttr = `onclick="window.open('${options.link}')"`
+        }else{
+            options.linkAttr = ""
+        }
+        return ()=>{return `<button ${options.idAttr} ${options.linkAttr} type="button" class="button-row button-question ${options.class}"><span>${octicons["question"].toSVG()}</span></button>`}
+    }
+
+    this.generateExpandButton = function(options){
+        options = this.processOptions(options)
+        return ()=>{return `<button ${options.idAttr} class="button-expand small up-caret ${options.class}"><span>${octicons["chevron-down"].toSVG()}</span></button>`}
+    }
+
+    this.generateSpinBox = function(options){
+        options = this.processOptions(options)
+        return ()=>{return `<div class="spin-box" ${options.idAttr}>
+                <input type="text" class="sched-input">
+                <button class="spin-box up"></button>
+                <button class="spin-box down"></button>
+        </div>`}
+    }
+
+    this.generateWordEntry = function(content, options){
+        options = this.processOptions(options)
+        return ()=>{
+            return `<button ${options.idAttr} class="word-list-entry"><span>${content}</span></button>`
+        }
+    }
+
     /**
      * Generate a scrollable box, with some contents
      * @param  {Array} contents - Contents of the scrollable box
@@ -70,39 +209,123 @@ function Util(){
         }
     }
 
-    this.generateLabeledInput = function(labelText, inputParams, options){
-        options = this.processOptions(options)
-        if (inputParams.placeholder == null){
-            inputParams.placeholder = ""
-        }
-        if (inputParams.value == null){
-            inputParams.value = ""
-        }
-        return () => {
-            return `<label>${labelText}</label>
-                    <input type="search" placeholder="${inputParams.placeholder}" value="${inputParams.value}" ${options.idAttr}>`
-        }
-    }
-
-    this.generatePlusButton = function(){
-        return ()=>{
-            return `<button class="plus-button"><span>${octicons.plus.toSVG()}</span></button>`
-        }
-    }
-
-    this.generateWordEntry = function(content, options){
-        options = this.processOptions(options)
-        return ()=>{
-            return `<button ${options.idAttr} class="word-list-entry"><span>${content}</span></button>`
-        }
-    }
-
     this.generateToolTip = function(content, options){
         options = this.processOptions(options)
         return ()=>{
             return `<div class="tooltip ${options.class}" ${options.idAttr}>${content}</div>`
         }
     }
+    /**
+     * Create a row with columns of specified width.
+     * Example usage:
+     * util.generateRow([
+     *      ["six",util.generateXButton()],
+     *      ["six",util.generatePlusButton()]
+     * ]{id:"cool-name",class:"my-class",columnOptions:{class:"tight-spacing"}})
+     * @param  {Array} columns - array of arrays describing contents of
+     * each of the columns
+     * @param {Object} options - Because this function involves creating
+     * rows _and_ columns, the options object is a little different. The main
+     * fields, id, class, etc, get passed to the row. Each row can be
+     * styled/modified by passing _another_ options object to the columnOptions
+     * field in the options Object
+     * @return {[type]}         [description]
+     */
+    this.generateRow = function(columns, options){
+        options = this.processOptions(options)
+        if (!("columnOptions" in options)){
+            options.columnOptions = {}
+        }
+        columnOptions = this.processOptions(options.columnOptions)
+        return () => {
+            var div = [`<div class="row">`];
+            if (columns.length == 1){
+                div.push(columns[0]());
+            }else{
+                columns.forEach((column) => {
+                    // First element is the width of the column
+                    var nColumns = column[0];
+                    var cb = column[1];
+                    div.push(`<div class="${nColumns} columns ${columnOptions.class}">`)
+                    div.push(cb())
+                    div.push(`</div>`)
+                })
+            }
+            div.push("</div>")
+            return div.join("")
+        }
+    }
+
+    /**
+     * Given some list of callbacks for generating HTML for rows,
+     * call them all, and stick them all together
+     * @param  {Array} rows - Array of callbacks.
+     * @return {String} - HTML for combined rows.
+     */
+    this.concatenateRows = function(rows){
+        return ()=>{
+            var div = [];
+            rows.forEach((row) => {
+                div.push(row())
+            })
+            return div.join("")
+        }
+    }
+
+    /**
+     * Given some row generated by this.generateRow, get the data
+     * from the elements that have the class selector (defaults to "sched-input")
+     * @param  {Object} row - The JQuery selector corresponding to the row
+     * from which we'd like to get data
+     * @param  {String} selector - A selector other than ".sched-input"
+     * @return {Array} - An array with all the data from the row, in order
+     * of appearance
+     */
+    this.getRowData = function(row, selector){
+        if (selector == null){
+            selector = ".sched-input"
+        }
+        var data = []
+        $(row).find(selector).each(function(){
+            data.push($(this).val())
+        })
+        return data;
+    }
+
+    /**
+     * Given some panel, get all the data from elements inside the panel
+     * with "sched-input" classes.
+     * @param  {String/Object} selector - selector for panel
+     * @return {Array} - Data inside panel
+     */
+    this.getPanelData = function(selector){
+        selector = this.process$(selector)
+        console.log(selector)
+        var data = []
+        selector.find(".sched-input").each((idx, elem)=>{
+            // var id = $(elem).attr('id')
+            var val = $(elem).val()
+            if (val == ""){
+                val = $(elem).attr("value")
+            }
+            data.push(val)
+        })
+        return data
+    }
+
+
+    /**
+     * Setup a button whose caret is supposed to flip when clicked.
+     * @param  {object} options - options object
+     * @return {null}
+     */
+    this.expandButtonSetup = function(options){
+        $(this).on("click", (event)=>{
+            console.log("clicked")
+            $(event.currentTarget).toggleClass("up-caret down-caret")
+        })
+    }
+
 
     /**
      * @function dropDownSetup
@@ -123,7 +346,7 @@ function Util(){
             }
         })
         parent.find("button span").html(octicons["chevron-down"].toSVG());
-        dropdownContent.find("div").on("click", function(){
+        dropdownContent.on("click", "div", function(){
             dropdownContent.hide()
             var val = $(this).attr("value")
             parent.attr("value",val)
@@ -137,6 +360,101 @@ function Util(){
         }
     }
 
+    this.spinBoxSetup = function(initialValue, increment){
+        if (! initialValue){
+            initialValue = 0.0
+        }
+        if (! increment){
+            increment = 1.0
+        }
+        return function() {
+            var parent = $(this);
+            var upButton = parent.find(".spin-box.up")
+            var downButton = parent.find(".spin-box.down")
+            var input = parent.find("input")
+            input.attr("value", initialValue);
+
+            var upDownFactory = function(upDown){
+                return function(){
+                    var curVal = parseFloat(input.val(),10);
+                    if (upDown == "up"){
+                        var newVal = curVal + increment
+                        input.val(newVal)
+                        parent.trigger("change",newVal)
+                    } else if (upDown == "down"){
+                        var newVal = curVal - increment;
+                        input.val(newVal);
+                        parent.trigger("change", newVal)
+                    }
+                }
+            }
+            upButton.html(`<span>${octicons["chevron-up"].toSVG()}</span>`);
+            downButton.html(`<span>${octicons["chevron-down"].toSVG()}</span>`);
+            upButton.on("click", upDownFactory("up"))
+            downButton.on("click", upDownFactory("down"))
+            input.on("keyup", function(event){
+                var curVal = $(this).val();
+                var curValFloat = parseFloat(curVal, 10);
+                if (curValFloat !== NaN){
+                    input.val(curValFloat)
+                    parent.trigger("change", curValFloat);
+                }
+            })
+        }
+    }
+
+    this.toggleHide = function(self, id){
+        return function(event){
+            var div = $(`#${id}`)
+            if (div.is(":visible")){
+                div.hide();
+            }else{
+                div.show()
+            }
+        }
+    }
+
+    this.toggleHiddenForm = function(self, id){
+        return (eventObject)=>{
+            if (id == null){
+                var hiddenRow = $(eventObject.currentTarget)
+                                        .parent().parent().next().find(".tooltip");
+            }else{
+                var hiddenRow = $(`#${id}`);
+            }
+            hiddenRow.toggleClass("open closed")
+        }
+    }
+
+    /**
+     * Update the sched file object with some new data.
+     * @param  {Object} schedFileObj - Instance of SchedFile
+     * @return {function} - function that accepts paramData
+     * as argument
+     */
+    this.updateSchedFile = function(schedFileObj){
+        /**
+         * Anonymous function that accepts paramData.
+         * Simple iterates through paramData.data object, updating schedFileObj.
+         * @param  {Object} paramData - Object with following structure:
+         * {
+         *      category: "category name",
+         *      data: [
+         *          {paramId: "sched param",
+         *          value: "new value"}
+         *      ]
+         * }
+         * @return {null}
+         */
+        return (paramData) => {
+            console.log(`paramData.data: ${paramData.data}`)
+            console.log(paramData.data)
+            var category = paramData.category
+            paramData.data.forEach((paramDatum) => {
+                SchedFile.emitEvent("updateSchedParam",[paramDatum.paramId, category, paramDatum.value])
+            })
+        }
+    }
 }
 
-var util = new Util()
+var util = new Util();
