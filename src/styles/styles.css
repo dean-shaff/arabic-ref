@@ -214,12 +214,29 @@ body {
 /* Change color of dropdown links on hover */
 .dropdown-content div:hover {background-color: #f1f1f1}
 
+button:hover{
+    border-color:#1EAEDB; /*Same as for inputs*/
+}
+
 button.plus-button{
     padding-right: 14px;
     padding-left: 14px;
 }
+button.plus-button:hover{
+    border-color: #00e500;
+}
+
+button.kebab-button{
+    padding-right: 20px;
+    padding-left: 20px;
+}
 
 button.plus-button span{
+    position: relative;
+    top: 4px;
+}
+
+button.kebab-button span{
     position: relative;
     top: 4px;
 }

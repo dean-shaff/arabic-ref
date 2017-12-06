@@ -104,9 +104,12 @@ function Util(){
      * @param  {[type]} options [description]
      * @return {[type]}         [description]
      */
-    this.generateTooltip = function(content, options){
+    this.generateToolTip = function(content, options){
         options = this.processOptions(options);
-        return ()=>{return `<div class="tooltip ${options.class}" ${options.idAttr}>${content()}</div>`}
+        if (content.constructor == Function){
+            content = content()
+        }
+        return ()=>{return `<div class="tooltip ${options.class}" ${options.idAttr}>${content}</div>`}
     }
 
     this.generateLabel = function(labelText, options){
@@ -155,7 +158,7 @@ function Util(){
 
     this.generateKebabButton = function(options){
         options = this.processOptions(options)
-        return ()=>{return `<button ${options.idAttr} type="button" class="button-row button-kebab ${options.class}">${octicons["kebab-vertical"].toSVG()}</button>`}
+        return ()=>{return `<button ${options.idAttr} class="button-row kebab-button ${options.class}"><span>${octicons["kebab-vertical"].toSVG()}</span></button>`}
     }
 
     this.generateQuestionButton = function(options){
@@ -171,6 +174,11 @@ function Util(){
     this.generateExpandButton = function(options){
         options = this.processOptions(options)
         return ()=>{return `<button ${options.idAttr} class="button-expand small up-caret ${options.class}"><span>${octicons["chevron-down"].toSVG()}</span></button>`}
+    }
+
+    this.generateButton = function(buttonText, options){
+        options = this.processOptions(options)
+        return ()=>{return `<button ${options.idAttr} class="${options.class}">${buttonText}</button>`}
     }
 
     this.generateSpinBox = function(options){
@@ -209,12 +217,12 @@ function Util(){
         }
     }
 
-    this.generateToolTip = function(content, options){
-        options = this.processOptions(options)
-        return ()=>{
-            return `<div class="tooltip ${options.class}" ${options.idAttr}>${content}</div>`
-        }
-    }
+    // this.generateToolTip = function(content, options){
+    //     options = this.processOptions(options)
+    //     return ()=>{
+    //         return `<div class="tooltip ${options.class}" ${options.idAttr}>${content}</div>`
+    //     }
+    // }
     /**
      * Create a row with columns of specified width.
      * Example usage:

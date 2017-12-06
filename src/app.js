@@ -57,7 +57,25 @@ function App(){
     }
 
     this.setupAddWord = function(){
-        $("#add-word").append(util.generatePlusButton({id:"add-word-button"}))
+        $("#add-word").append(util.generateButton("Add Word",{id:"add-word-button"}))
+        $("#add-word-form-container").html(util.generateToolTip(
+            util.concatenateRows([
+                util.generateRow([
+                    ["four", util.generateLabel("Word in English")],
+                    ["eight", util.generateRowInput("mom","")]
+                ]),
+                util.generateRow([
+                    ["eight",util.generateRowInput("ماما","")],
+                    ["four", util.generateLabel("كلمة بالعربية")]
+                ]),
+                util.generateToolTip("",{id:"extra-add-word",class:"hidden"}),
+                util.generateRow([
+                    ["six", util.generatePlusButton({class:"u-full-width"})],
+                    ["six", util.generateKebabButton({id:"extra-add-word-button",class:"u-full-width"})]
+                ])
+            ]), {id:"add-word-form",class:"add-word-form closed"}
+        ))
+
         $("#add-word-button").on("click", this.addWordCb(this))
     }
 
@@ -167,8 +185,7 @@ function App(){
 
     this.addWordCb = function(self){
         return (event) => {
-            $(event.currentTarget).after(util.generateToolTip(
-            ))
+            $("#add-word-form").toggleClass('open closed');
         }
     }
 
