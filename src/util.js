@@ -1,5 +1,34 @@
 function Util(){
 
+    vowels = {
+        damma:"u064F",
+        fatha:"u064E",
+        kasra:"u0650",
+        sukun:"u0652",
+        madda:"u0653",
+        // hamzaAbove:"u0654",
+        // hamzaBelow:"u0654",
+    }
+
+    /**
+     * Given some word in arabic, remove all vowelization
+     * @param  {String} arWord [A word in arabic with vowelization]
+     * @return {String} The same word, without vowelization
+     */
+    this.removeVowelization = function(word){
+        var escaped = escape(word).split("%").slice(1,)
+        // console.log(escaped)
+        // console.log(Object.values(vowels))
+        noVowels = escaped.filter((item) => {
+            let val = Object.values(vowels).indexOf(item)
+            return val == -1
+        })
+        noVowels = noVowels.map(item => `%${item}`).join("")
+        // console.log(noVowels)
+        // console.log(unescape(noVowels))
+        return unescape(noVowels)
+    }
+
     /**
      * Given the raw dictionary from the cloud database (or from a local JSON file),
      * create some additional objects that are easier to search and iterate through.

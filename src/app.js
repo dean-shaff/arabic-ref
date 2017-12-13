@@ -285,17 +285,18 @@ function App(){
     this.searchDictionary = function(keyword){
         var possibleMatches = {};
         // make a little function to search the individual dictionaries
-        var searchDictionary = function(dictionary){
+        var searchDictionary = function(dictionary, wordProcessor){
             Object.keys(dictionary).forEach(function(e){
-                if (e.indexOf(keyword) !== -1){
+                var wordSearch = wordProcessor(e)
+                if (wordSearch.indexOf(keyword) !== -1){
                     possibleMatches[e] = dictionary[e]
                 }
             })
         }
         // Now apply searchDictionary to the english -> Arabic and Arabic -> English
         // dictionaries:
-        searchDictionary(__ar_to_en__);
-        searchDictionary(__en_to_ar__);
+        searchDictionary(__ar_to_en__, util.removeVowelization);
+        searchDictionary(__en_to_ar__, word=>word);
         return possibleMatches;
     }
 }
