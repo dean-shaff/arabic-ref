@@ -1,10 +1,24 @@
+from __future__ import print_function
+
+import sys
 import os
 import json
 import uuid
 
 cur_dir = os.path.dirname(os.path.abspath(__file__))
 
-def process_dictionary(in_path, out_path):
+def update_cloudant_dictionaries(data):
+
+    sys.path.append("/home/dean/web/cloudant-api")
+
+    from cloudant_api.api import DatabaseHandler
+
+    from cred import arabic_ref_api
+    dh = DatabaseHandler(arabic_ref_api)
+    print(dh.update_db(data))
+
+def process_dictionary(in_path, out_path=None):
+
     with open(in_path, "r") as f:
         data = json.load(f)
     en_dict = {}
@@ -34,12 +48,23 @@ def process_dictionary(in_path, out_path):
                 ar_dict[word] = {'en':en, "index":unique_id, "dialect":dialect}
         for word in en:
             en_dict[word] = {'ar':ar, "index":unique_id}
-    with open(out_path, "w") as f:
-        f.write("__en_to_ar__={}\n".format(json.dumps(en_dict)))
-        f.write("__ar_to_en__={}\n".format(json.dumps(ar_dict)))
-        f.write("__dict_index__={}\n".format(json.dumps(index_dict)))
-        f.write("__keywords__={}\n".format(json.dumps(keyword_dict)))
+    data_js = {
+        "__en_to_ar__":en_dict,
+        "__ar_to_en__":ar_dict,
+        "__dict_index__":index_dict,
+        "__keywords__":keyword_dict,
+    }
+    if out_path is not None:
+        print("Writing data out to {}".format(out_path))
+        with open(out_path, "w") as f:
+            for var_name in data_js:
+                data_entry = data_js[var_name]
+                f.write("{}={}\n".format(var_name, json.dumps(data_entry)))
+
+    return data
+
 
 if __name__ == '__main__':
-    process_dictionary(os.path.join(cur_dir, "dictionary.json"),
+    data = process_dictionary(os.path.join(cur_dir, "dictionary.json"),
                         os.path.join(cur_dir, "dictionary.js"))
+    update_cloudant_dictionaries(data)

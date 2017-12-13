@@ -1,6 +1,121 @@
 function Util(){
 
     /**
+     * Given the raw dictionary from the cloud database (or from a local JSON file),
+     * create some additional objects that are easier to search and iterate through.
+     * @param {Array} dictionary - An array of Objects containing Arabic to English
+     *      groups/pairs
+     * @return {Object}
+     */
+    this.processDictionary = function(callbacks){
+        return (dictionary)=>{
+            console.log(dictionary)
+            var enDict = {}
+            var arDict = {}
+            var indexDict = {}
+            var keywordDict = {}
+
+            dictionary.forEach((entry)=>{
+                entry = entry.doc
+                var ar = entry["ar"]
+                var en = entry["en"]
+                var id = entry["_id"]
+                indexDict[id] = entry
+                if ("category" in entry){
+                    entry["category"].forEach((cat)=>{
+                        if (!(cat in keywordDict)){
+                            keywordDict[cat] = []
+                        }
+                        keywordDict[cat].push(id)
+                    })
+                }
+                if (ar != undefined){
+                    if (ar.constructor !== Object){
+                        ar = {"fos7a":ar}
+                    }
+                }else{
+                    ar = {"fos7a":""}
+                }
+
+                if (en != undefined){
+                    if (en.constructor !== Array){
+                        en = [en]
+                    }
+                }else{
+                    en = [""]
+                }
+
+                Object.keys(ar).forEach((dialect)=>{
+                    var words_by_dialect = ar[dialect]
+                    if (words_by_dialect.constructor !== Array){
+                        words_by_dialect = [words_by_dialect]
+                    }
+                    words_by_dialect.forEach((word)=>{
+                        arDict[word] = {
+                            en: en,
+                            _id: id,
+                            dialect: dialect
+                        }
+                    })
+                })
+
+                en.forEach((word)=>{
+                    enDict[word] = {
+                        ar: ar,
+                        _id: id
+                    }
+                })
+            })
+            var returnVal = {
+                en_to_ar: enDict,
+                ar_to_en: arDict,
+                index: indexDict,
+                keywords: keywordDict
+            }
+
+            window.__en_to_ar__ = enDict
+            window.__ar_to_en__ = arDict
+            window.__dict_index__ = indexDict
+            window.__keywords__ = keywordDict
+
+            if (callbacks != undefined){
+                if (callbacks.constructor !== Array){
+                    callbacks = [callbacks]
+                }
+                callbacks.forEach((callback)=>{
+                    callback(returnVal)
+                })
+            }
+        }
+    }
+
+    this.getDictionaryData = function(callbacks){
+        if (callbacks == undefined){
+            callbacks = [(data)=>{}]
+        }else{
+            if (callbacks.constructor !== Array){
+                callbacks = [callbacks]
+            }
+        }
+        $.ajax({
+            crossDomain:true,
+            type:"GET",
+            data:{
+                include_docs:true
+            },
+            url:"https://dshaff001.cloudant.com/arabic-ref/_all_docs",
+            contentType:"text/plain",
+            success: (data)=>{
+                callbacks.forEach((callback)=>{
+                    callback(data.rows)
+                })
+            }
+        })
+
+
+    }
+
+    /**
      * If a string is passed, return $(string),
      * otherwise return the selector itself
      * @type {String/Object} selector -

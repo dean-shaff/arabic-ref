@@ -8,8 +8,13 @@ function App(){
     }
 
     this.init = function(){
-        this.setupUI();
-        this.resizeCb(this)();
+        util.getDictionaryData(
+            util.processDictionary([
+                    this.setupUI.bind(this),
+                    this.resizeCb(this)
+                ]
+            )
+        )
     }
 
     this.setupUI = function(){
@@ -80,9 +85,9 @@ function App(){
     }
 
     this.wordListClickCb = function(self){
-        return (eventObject)=>{
+        return (evt)=>{
             var generateDescriptionHTML = ()=>{
-                var wordText = $(eventObject.currentTarget).find("span").html().split(" | ");
+                var wordText = $(evt.currentTarget).find("span").html().split(" | ");
                 var [en_word, ar_word] = wordText;
                 var arabic = __en_to_ar__[en_word]['ar'];
                 html = [`<h5>${en_word}</h5>`];
@@ -91,7 +96,7 @@ function App(){
                 if ("3mia" in arabic){
                     html.push(`<h5>عامية : ${arabic['3mia']}</h5>`);
                 }
-                var index = __en_to_ar__[en_word].index;
+                var index = __en_to_ar__[en_word]._id;
                 var keywords = __dict_index__[index].category
                 var examples = __dict_index__[index].example
                 if (keywords.length != 0){
@@ -116,7 +121,7 @@ function App(){
             var descripDivName = "word-description"
 
             var generateNewDescription = (callback)=>{
-                $(eventObject.currentTarget).after(
+                $(evt.currentTarget).after(
                     util.generateToolTip(`${generateDescriptionHTML()}`,{id:"word-description",class:"closed"})
                 )
                 setTimeout(()=>{
@@ -139,7 +144,7 @@ function App(){
 
             if ($(`#${descripDivName}`).length){
                 var prev = $(`#${descripDivName}`).prev()
-                if (prev.is($(eventObject.currentTarget))){
+                if (prev.is($(evt.currentTarget))){
                     removeCurrentDescription()
                 }else{
                     removeCurrentDescription(generateNewDescription)
@@ -151,8 +156,8 @@ function App(){
     }
 
     this.searchKeyDownCb = function(self){
-        return (eventObject)=>{
-            var currentVal = $(eventObject.currentTarget).val().toLowerCase();
+        return (evt)=>{
+            var currentVal = $(evt.currentTarget).val().toLowerCase();
             var scrollable ;
             if (currentVal == ""){
                 // contents = self.generateWordListHTML(__ar_to_en__);
