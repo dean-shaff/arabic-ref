@@ -1,5 +1,4 @@
 *.pyc
-*.txt
 *.log
 client/node_modules/
 Skeleton-2.0.4.zip
