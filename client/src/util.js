@@ -12,7 +12,7 @@ function Util(){
     }
 
 
-    var vowels = {
+    this.vowels = {
         damma:"u064F",
         fatha:"u064E",
         kasra:"u0650",
@@ -27,9 +27,9 @@ function Util(){
      */
     this.removeVowelization = function(word){
         var escaped = escape(word).split("%").slice(1,)
-        var vowelsCodes = Object.values(vowels)
+        var vowelsCodes = Object.values(this.vowels)
         noVowels = escaped.filter((item) => {
-            vowelsCodes.indexOf(item) == -1
+            return vowelsCodes.indexOf(item) == -1
         })
         noVowels = noVowels.map(item => `%${item}`).join("")
         return unescape(noVowels)
@@ -44,7 +44,6 @@ function Util(){
      */
     this.processDictionary = function(callbacks){
         return (dictionary)=>{
-            console.log(dictionary)
             var enDict = {}
             var arDict = {}
             var indexDict = {}
@@ -407,7 +406,6 @@ function Util(){
         return () => {
             var div = [`<div class="row">`];
             if (columns.length == 1){
-                console.log(columns)
                 div.push(columns[0][1]());
             }else{
                 columns.forEach((column) => {

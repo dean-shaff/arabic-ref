@@ -8,6 +8,7 @@ function App(){
     }
 
     this.init = function(){
+        // console.log(util.removeVowelization("ماما"))
         util.getDictionaryData(
             util.processDictionary([
                     this.setupUI.bind(this),
@@ -202,6 +203,7 @@ function App(){
             contents = self.generateWordListHTML(possibleMatches);
             $("#word-list-contents").html(`${contents.join("")}`);
         }
+
     }
 
     this.changeFontCb = function(self){
@@ -348,9 +350,9 @@ function App(){
      */
     this.searchDictionary = function(keyword){
         var possibleMatches = {};
-        // make a little function to search the individual dictionaries
-        var searchDictionary = function(dictionary, wordProcessor){
-            Object.keys(dictionary).forEach(function(e){
+
+        var searchIndividualDictionary = (dictionary, wordProcessor)=>{
+            Object.keys(dictionary).forEach((e)=>{
                 var wordSearch = wordProcessor(e)
                 if (wordSearch.indexOf(keyword) !== -1){
                     possibleMatches[e] = dictionary[e]
@@ -359,8 +361,8 @@ function App(){
         }
         // Now apply searchDictionary to the english -> Arabic and Arabic -> English
         // dictionaries:
-        searchDictionary(__ar_to_en__, util.removeVowelization);
-        searchDictionary(__en_to_ar__, word=>word);
+        searchIndividualDictionary(__ar_to_en__, util.removeVowelization.bind(util));
+        searchIndividualDictionary(__en_to_ar__, word=>word);
         return possibleMatches;
     }
 }
