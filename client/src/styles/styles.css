@@ -4,6 +4,10 @@ button{
     font-weight: 400;
 }
 
+button:hover{
+    border-color:
+}
+
 .inline{
     display: inline-block;
     position: relative;
@@ -213,10 +217,10 @@ body {
 
 /* Change color of dropdown links on hover */
 .dropdown-content div:hover {background-color: #f1f1f1}
-
-button:hover{
-    border-color:#1EAEDB; /*Same as for inputs*/
-}
+/*Same as for inputs*/
+/*button:hover{
+    border-color:#1EAEDB;
+}*/
 
 button.plus-button{
     padding-right: 14px;
