@@ -25,6 +25,7 @@ class DatabaseHandler(object):
         """
         Get the contents of the entire database
         """
+        self.client.headers = {'Content-Type':'text/plain'}
         if data is None: data = {}
         print(data)
         resp = self.client.request("GET", self.uri_db.format("_all_docs"),params=data)
@@ -55,11 +56,9 @@ class DatabaseHandler(object):
         """
         Update an item or items in the database
         Args:
-            data (list/dictionary): a python list of dictionaries with an
-                "_id" key. If the dictionaries don't have "_id" keys, then
-                the function will create a new entry in the database.
-                If a dictionary is supplied, then the keys are used as ids.
+            data (list):
         """
+        self.client.headers = {'Content-Type':'application/json'}
         if not isinstance(data, list):
             data = [data]
         resp = self.client.request("POST", self.uri_db.format("_bulk_docs"),data=json.dumps({"docs":data}))

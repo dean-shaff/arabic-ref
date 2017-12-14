@@ -13,6 +13,8 @@ button:hover{
     position: relative;
 }
 
+
+
 .word-list-entry{
     float: left;
     padding-right: 10px;
@@ -60,6 +62,10 @@ than the max-height of div */
     padding-right: 15px;
 }
 
+.arabic-input{
+    text-align: right;
+    direction: rtl;
+}
 .center-align{
     text-align:center;
 }

@@ -8,9 +8,9 @@ function App(){
     }
 
     this.init = function(){
-        util.addWord({ar:"arabic word", en:"english word"},[
-            (data)=>{console.log(data)}
-        ])
+        // util.addWord({ar:"arabic word", en:"english word"},[
+        //     (data)=>{console.log(data)}
+        // ])
         util.getDictionaryData(
             util.processDictionary([
                     this.setupUI.bind(this),
@@ -65,25 +65,27 @@ function App(){
     }
 
     this.setupAddWord = function(){
-        $("#add-word").append(util.generateButton("Add Word",{id:"add-word-button"}))
+        $("#add-word").append(util.generateButton("Add Word",{id:"toggle-add-word-form"}))
         $("#add-word-form-container").html(util.generateToolTip(
             util.concatenateRows([
                 util.generateRow([
                     ["four", util.generateLabel("Word in English")],
-                    ["eight", util.generateRowInput("mom","")]
+                    ["eight", util.generateRowInput("mom","mom",{id:"add-word-en"})]
                 ]),
                 util.generateRow([
-                    ["eight",util.generateRowInput("ماما","")],
+                    ["eight",util.generateRowInput("ماما","ماما",{id:"add-word-ar",class:"arabic-input"})],
                     ["four", util.generateLabel("كلمة بالعربية")]
                 ]),
                 util.generateToolTip("",{id:"extra-add-word",class:"hidden"}),
                 util.generateRow([
-                    ["six", util.generatePlusButton({class:"u-full-width"})],
+                    ["six", util.generatePlusButton({id:"add-word-button", class:"u-full-width"})],
                     ["six", util.generateKebabButton({id:"extra-add-word-button",class:"u-full-width"})]
                 ])
             ]), {id:"add-word-form",class:"add-word-form closed"}
         ))
-
+        $("#toggle-add-word-form").on("click", (evt)=>{
+            $("#add-word-form").toggleClass('open closed');
+        })
         $("#add-word-button").on("click", this.addWordCb(this))
     }
 
@@ -193,7 +195,14 @@ function App(){
 
     this.addWordCb = function(self){
         return (event) => {
-            $("#add-word-form").toggleClass('open closed');
+            var ar_word = $("#add-word-ar").val()
+            var en_word = $("#add-word-en").val()
+            console.log(`${ar_word}, ${en_word}`)
+            var data = {
+                ar: ar_word,
+                en: en_word
+            }
+            util.addWord(data, (data)=>{console.log("Got response back from server")})
         }
     }
 

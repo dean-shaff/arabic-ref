@@ -24,8 +24,17 @@ def add_word():
         data = request.values
         en = request.values["en"]
         ar = request.values["ar"]
-
-        print(en, ar)
+        dh = DatabaseHandler(arabic_ref_api)
+        resp = dh.update_db({
+            "ar":{"fos7a":ar},
+            "en":[en],
+            "example": {
+                "en": [],
+                "ar": []
+            },
+            "category": []
+        })
+        print(resp)
 
     return jsonify({"success":True})
 

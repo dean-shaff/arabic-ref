@@ -284,7 +284,7 @@ function Util(){
 
     this.generateRowInput = function(placeholder, value, options){
         options = this.processOptions(options)
-        return ()=>{return`<input ${options.idAttr} class="u-full-width sched-input" placeholder="${placeholder}" value="${value}" type="text">`}
+        return ()=>{return`<input ${options.idAttr} class="u-full-width sched-input ${options.class}" placeholder="${placeholder}" value="${value}" type="text">`}
     }
 
     this.generateLabeledInput = function(labelText, placeholder, value, options){
