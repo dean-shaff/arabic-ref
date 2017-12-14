@@ -1,4 +1,8 @@
 *.pyc
 *.txt
 *.log
-node_modules/
+client/node_modules/
+Skeleton-2.0.4.zip
+sandbox/
+client/src/data/cred.py
+__pycache__

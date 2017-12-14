@@ -97,8 +97,7 @@
             "en": []
         },
         "category": [
-            "time",
-            "still"
+            "time"
         ]
     },
     {
@@ -1430,7 +1429,7 @@
         ]
     },
     {
-        "en": "ُunderstand",
+        "en": "understand",
         "ar": "يَفْهَم",
         "example": {
             "ar": [],
@@ -1758,7 +1757,7 @@
             "en": []
         },
         "category": [
-            "far from"
+            "adverb"
         ]
     },
     {
@@ -2176,17 +2175,6 @@
         },
         "category": [
             "adjective"
-        ]
-    },
-    {
-        "en": "",
-        "ar": "",
-        "example": {
-            "ar": [],
-            "en": []
-        },
-        "category": [
-            "verb"
         ]
     }
 ]

@@ -1,0 +1,242 @@
+
+button{
+    text-transform: none;
+    font-weight: 400;
+}
+
+.inline{
+    display: inline-block;
+    position: relative;
+}
+
+.word-list-entry{
+    float: left;
+    padding-right: 10px;
+    padding-left: 10px;
+    font-size: 1.8rem;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    position: relative;
+}
+
+.word-list-entry span{
+    /*position: relative;*/
+    vertical-align: super;
+}
+
+.word-list-entry:hover{
+    color: #b82e00;
+    /*border-color: #b82e00;*/
+    transition: all 0.4s ease-in-out;
+}
+
+#word-list{
+    border: 1px solid #D1D1D1;
+    padding: 25px;
+    border-radius: 4px;
+}
+
+/*A box that will scroll when content is larger
+than the max-height of div */
+.scrollable-box-container {
+    height:auto;
+    overflow: hidden;
+    width:100%;
+}
+
+.scrollable-box {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    padding-right: 25px;
+}
+
+.right-align {
+    text-align: right;
+    padding-right: 15px;
+}
+
+.center-align{
+    text-align:center;
+}
+
+.bottom-spacing {
+    margin-bottom:10px;
+}
+
+body {
+    font-family: 'Amiri', serif;
+}
+
+/*Tooltip: A hidden element that appears when additional information is requested.*/
+.tooltip{
+    position: relative;
+    width:100%;
+}
+
+.tooltip.closed{
+    float: none;
+    margin: 0;
+    max-height: 0;
+    padding: 0;
+    overflow-y: hidden;
+    opacity: 0 ;
+    transition: all 0.4s ease-in-out;
+}
+
+.tooltip.open{
+    float:left;
+    height:100% ;
+    margin: 1rem 1rem;
+    padding: 1rem 1rem;
+    max-height: 200px;
+    opacity: 1 ;
+    overflow-y: visible;
+    transition: all 0.4s ease-in-out;
+}
+
+/*Hover tooltip: A tooltip that appears when a div is hovered over */
+.hover-tooltip{
+    float: left;
+    border: 1px solid #D1D1D1;
+    border-radius: 4px;
+    position:relative;
+}
+
+.hover-tooltip.open{
+    opacity: 1;
+    max-height: 200px;
+    transition: all 0.4s ease-in-out;
+}
+
+.hover-tooltip.closed{
+    opacity: 0;
+    max-height: 0 ;
+    transition: all 0.4s ease-in-out;
+}
+
+.float-row{
+    position: relative;
+    float:left;
+    width:100%;
+    margin-top:1rem;
+    margin-bottom: 1rem;
+    /*overflow-y: visible;*/
+}
+
+
+/*Below we define some styling for dropdowns so we can use divs as dropdowns*/
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-top: 0.5rem;
+}
+
+.dropdown label{
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 7px;
+    width: 30%;
+    float: left;
+    font-weight: 400;
+}
+
+
+/*Define the styling of the display area to the left of the dropdown button */
+.dropdown div .dropdown-display {
+    border-top-right-radius: 0px ;
+    border-bottom-right-radius: 0px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-right-style:none;
+    text-transform: none;
+    width: 60%;
+    overflow-x: hidden;
+    text-align: left;
+    padding: 0px 10px;
+}
+
+.dropdown.as-label div .dropdown-display {
+    height:28px;
+    margin-bottom: 0.5rem;
+    padding: 0px 5px;
+}
+
+.dropdown.as-label div .dropdown-display span {
+    position: absolute;
+    margin-top: -6px;
+}
+
+/*Disable the skeleton default hover action*/
+.dropdown div .dropdown-display:hover{
+    border-color: #bbb;
+}
+
+/*Define the styling of the button to the right of the dropdown display area*/
+.dropdown button {
+    float:right;
+    border-top-left-radius: 0px ;
+    border-bottom-left-radius: 0px;
+    width: 10%;
+    margin:0;
+    padding:0;
+    padding-top:4px;
+}
+
+.dropdown.as-label button {
+    padding-top: 0px;
+    height: 28px;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    width:70%;
+    top:90%;
+    margin-left: 30%;
+}
+
+/* divs inside the dropdown */
+.dropdown-content div {
+    text-transform: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    width: auto;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content div:hover {background-color: #f1f1f1}
+
+button:hover{
+    border-color:#1EAEDB; /*Same as for inputs*/
+}
+
+button.plus-button{
+    padding-right: 14px;
+    padding-left: 14px;
+}
+button.plus-button:hover{
+    border-color: #00e500;
+}
+
+button.kebab-button{
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+button.plus-button span{
+    position: relative;
+    top: 4px;
+}
+
+button.kebab-button span{
+    position: relative;
+    top: 4px;
+}
