@@ -10,7 +10,6 @@ from flask import Flask, render_template, jsonify, request
 from cred import arabic_ref_api
 from cloudant_api.api import DatabaseHandler
 
-db = DatabaseHandler(arabic_ref_api)
 
 app = Flask(
             __name__,
@@ -21,7 +20,9 @@ app = Flask(
 
 @app.route("/get_dictionary", methods=["GET"])
 def get_dictionary():
-    return
+    dh = DatabaseHandler(arabic_ref_api)
+    db = dh.get_db(data={"include_docs":True})
+    return jsonify(db)
 
 @app.route("/")
 def main():

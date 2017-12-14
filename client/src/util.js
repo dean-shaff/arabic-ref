@@ -115,6 +115,8 @@ function Util(){
     }
 
     this.getDictionaryData = function(callbacks){
+        var dictionaryUrl = $SCRIPT_ROOT + "/get_dictionary"
+        console.log(dictionaryUrl)
         if (callbacks == undefined){
             callbacks = [(data)=>{}]
         }else{
@@ -125,11 +127,11 @@ function Util(){
         $.ajax({
             crossDomain:true,
             type:"GET",
-            data:{
-                include_docs:true
-            },
-            url:"https://dshaff001.cloudant.com/arabic-ref/_all_docs",
-            contentType:"text/plain",
+            // data:{
+            //     include_docs:true
+            // },
+            url: dictionaryUrl,
+            contentType:"json/application",
             success: (data)=>{
                 callbacks.forEach((callback)=>{
                     callback(data.rows)
