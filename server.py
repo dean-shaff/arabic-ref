@@ -20,26 +20,36 @@ app = Flask(
 
 @app.route("/add_word", methods=["POST"])
 def add_word():
+    print(request.method)
     if request.method == "POST":
-        data = request.values
-        en = request.values["en"]
-        ar = request.values["ar"]
-        dh = DatabaseHandler(arabic_ref_api)
-        resp = dh.update_db({
-            "ar":{"fos7a":ar},
+        data = json.loads(request.values["data"])
+        en = data["en"]
+        ar_fos7a = data["ar_fos7a"]
+        ar_3mia = data["ar_3mia"]
+        category = data["category"]
+        example_en = data["example_en"]
+        example_ar = data["example_ar"]
+
+        update = {
+            "ar":{"fos7a":ar_fos7a, "3mia":ar_3mia},
             "en":[en],
             "example": {
-                "en": [],
-                "ar": []
+                "en": example_en,
+                "ar": example_ar
             },
-            "category": []
-        })
+            "category": category
+        }
+        print(update)
+
+        dh = DatabaseHandler(arabic_ref_api)
+        resp = dh.update_db(update)
         print(resp)
 
     return jsonify({"success":True})
 
 @app.route("/get_dictionary", methods=["GET"])
 def get_dictionary():
+    print("Loading up dictionary")
     dh = DatabaseHandler(arabic_ref_api)
     db = dh.get_db(data={"include_docs":True})
     return jsonify(db)

@@ -8,16 +8,19 @@ function App(){
     }
 
     this.init = function(){
-        // util.addWord({ar:"arabic word", en:"english word"},[
-        //     (data)=>{console.log(data)}
-        // ])
         util.getDictionaryData(
             util.processDictionary([
                     this.setupUI.bind(this),
-                    this.resizeCb(this)
+                    this.resizeCb(this),
+                    // this.testUi.bind(this)
                 ]
             )
         )
+    }
+
+    this.testUi = function(){
+        $("#toggle-add-word-form").click()
+        $("#add-word-button").click()
     }
 
     this.setupUI = function(){
@@ -70,34 +73,37 @@ function App(){
             util.concatenateRows([
                 util.generateRow([
                     ["four", util.generateLabel("Word in English")],
-                    ["eight", util.generateRowInput("mom","mom",{id:"add-word-en"})]
+                    ["eight", util.generateRowInput("mom","",{id:"add-word-en"})]
                 ]),
                 util.generateRow([
-                    ["eight",util.generateRowInput("ماما","ماما",{id:"add-word-ar-fos7a",class:"arabic-input"})],
+                    ["eight",util.generateRowInput("ماما","",{id:"add-word-ar-fos7a",class:"arabic-input"})],
                     ["four", util.generateLabel("كلمة بالعربية فصحى")]
                 ]),
 
                 util.generateToolTip(util.concatenateRows([
                     util.generateRow([
-                        ["eight",util.generateRowInput("ماما","ماما",{id:"add-word-ar-3mia",class:"arabic-input"})],
+                        ["eight",util.generateRowInput("ماما","",{id:"add-word-ar-3mia",class:"arabic-input"})],
                         ["four", util.generateLabel("كلمة بالعربية عامىة")]
                     ]),
                     util.generateRow([
                         ["four", util.generateLabel("Keywords")],
-                        ["eight", util.generateRowInput("noun, family","")]
+                        ["eight", util.generateRowInput("noun, family","",{id:"add-word-keywords"})]
                     ]),
                     util.generateRow([
                         ["four", util.generateLabel("Example")],
-                        ["eight", util.generateRowInput("I love my mom","")]
+                        ["eight", util.generateRowInput("I love my mom","",{id:"add-word-example-en"})]
                     ]),
                     util.generateRow([
-                        ["eight", util.generateRowInput("أنا أحب ماما","",{class:"arabic-input"})],
+                        ["eight", util.generateRowInput("أنا أحب ماما","",{class:"arabic-input",id:"add-word-example-ar"})],
                         ["four", util.generateLabel("مثال")],
                     ]),
                 ]),{id:"extra-add-word",class:"closed no-padding-no-margin"}),
                 util.generateRow([
                     ["six", util.generatePlusButton({id:"add-word-button", class:"u-full-width"})],
                     ["six", util.generateKebabButton({id:"extra-add-word-button",class:"u-full-width"})]
+                ]),
+                util.generateRow([
+                    ["twelve",()=>`<h5 id="add-word-message"></h5>`]
                 ])
             ]), {id:"add-word-form",class:"add-word-form closed"}
         ))
@@ -216,14 +222,39 @@ function App(){
 
     this.addWordCb = function(self){
         return (event) => {
-            var ar_word = $("#add-word-ar-fos7a").val()
+            var ar_word_fos7a = $("#add-word-ar-fos7a").val()
+            var ar_word_3mia = $("#add-word-ar-3mia").val()
             var en_word = $("#add-word-en").val()
-            console.log(`${ar_word}, ${en_word}`)
-            var data = {
-                ar: ar_word,
-                en: en_word
+            var en_example = $("#add-word-example-en").val().split(",")
+            var ar_example = $("#add-word-example-ar").val().split(",")
+            var keywords = $("#add-word-keywords").val().split(",")
+
+            console.log(`ar_word_fos7a: ${ar_word_fos7a}`)
+            console.log(`ar_word_3mia: ${ar_word_3mia}`)
+            console.log(`en_word: ${en_word}`)
+            console.log(`en_example: ${en_example}`)
+            console.log(`ar_example: ${ar_example}`)
+            console.log(`keywords: ${keywords}`)
+
+            if (!(en_word in __en_to_ar__) && !(ar_word_fos7a in __ar_to_en__)){
+                var data = {
+                    ar_fos7a:ar_word_fos7a,
+                    ar_3mia:ar_word_3mia,
+                    en: en_word,
+                    category:keywords,
+                    example_en:en_example,
+                    example_ar:ar_example
+                }
+                console.log(data)
+                util.addWord(data, (data)=>{
+                    $("#add-word-message").html("Added word!")
+                    setTimeout(()=>{
+                        $("#add-word-message").html("")
+                    },5000)
+                })
+            }else{
+                $("#add-word-message").html("Word already in dictionary")
             }
-            util.addWord(data, (data)=>{console.log("Got response back from server")})
         }
     }
 

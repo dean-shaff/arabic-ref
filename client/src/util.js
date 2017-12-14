@@ -147,7 +147,7 @@ function Util(){
         $.ajax({
             // crossDomain:true,
             type: "POST",
-            data:data,
+            data:{data:JSON.stringify(data)},
             url: addWordUrl,
             // contentType: "json/application",
             success: (data)=>{
@@ -407,7 +407,8 @@ function Util(){
         return () => {
             var div = [`<div class="row">`];
             if (columns.length == 1){
-                div.push(columns[0]());
+                console.log(columns)
+                div.push(columns[0][1]());
             }else{
                 columns.forEach((column) => {
                     // First element is the width of the column
