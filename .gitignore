@@ -5,3 +5,4 @@ Skeleton-2.0.4.zip
 sandbox/
 client/src/data/cred.py
 __pycache__
+cloudant-api/.git/
