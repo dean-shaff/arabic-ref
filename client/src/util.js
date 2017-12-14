@@ -127,9 +127,6 @@ function Util(){
         $.ajax({
             crossDomain:true,
             type:"GET",
-            // data:{
-            //     include_docs:true
-            // },
             url: dictionaryUrl,
             contentType:"json/application",
             success: (data)=>{
