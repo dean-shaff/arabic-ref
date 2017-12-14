@@ -1,13 +1,23 @@
 function Util(){
 
+    this.processCallbacks = function(callbacks){
+        if (callbacks == undefined){
+            callbacks = [(data)=>{}]
+        }else{
+            if (callbacks.constructor !== Array){
+                callbacks = [callbacks]
+            }
+        }
+        return callbacks
+    }
+
+
     var vowels = {
         damma:"u064F",
         fatha:"u064E",
         kasra:"u0650",
         sukun:"u0652",
         madda:"u0653",
-        // hamzaAbove:"u0654",
-        // hamzaBelow:"u0654",
     }
 
     /**
@@ -116,16 +126,9 @@ function Util(){
 
     this.getDictionaryData = function(callbacks){
         var dictionaryUrl = $SCRIPT_ROOT + "/get_dictionary"
-        console.log(dictionaryUrl)
-        if (callbacks == undefined){
-            callbacks = [(data)=>{}]
-        }else{
-            if (callbacks.constructor !== Array){
-                callbacks = [callbacks]
-            }
-        }
+        callbacks = this.processCallbacks(callbacks)
         $.ajax({
-            crossDomain:true,
+            // crossDomain:true,
             type:"GET",
             url: dictionaryUrl,
             contentType:"json/application",
@@ -135,9 +138,26 @@ function Util(){
                 })
             }
         })
-
-
     }
+
+    this.addWord = function(data, callbacks){
+        var addWordUrl = $SCRIPT_ROOT + "/add_word"
+        callbacks = this.processCallbacks(callbacks)
+        console.log(data)
+        $.ajax({
+            // crossDomain:true,
+            type: "POST",
+            data:data,
+            url: addWordUrl,
+            // contentType: "json/application",
+            success: (data)=>{
+                callbacks.forEach((callback)=>{
+                    callback(data)
+                })
+            }
+        })
+    }
+
 
     /**
      * If a string is passed, return $(string),

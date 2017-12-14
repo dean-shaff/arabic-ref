@@ -18,6 +18,17 @@ app = Flask(
             static_url_path=""
 )
 
+@app.route("/add_word", methods=["POST"])
+def add_word():
+    if request.method == "POST":
+        data = request.values
+        en = request.values["en"]
+        ar = request.values["ar"]
+
+        print(en, ar)
+
+    return jsonify({"success":True})
+
 @app.route("/get_dictionary", methods=["GET"])
 def get_dictionary():
     dh = DatabaseHandler(arabic_ref_api)

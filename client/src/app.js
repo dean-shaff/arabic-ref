@@ -8,6 +8,9 @@ function App(){
     }
 
     this.init = function(){
+        util.addWord({ar:"arabic word", en:"english word"},[
+            (data)=>{console.log(data)}
+        ])
         util.getDictionaryData(
             util.processDictionary([
                     this.setupUI.bind(this),

@@ -1,7 +1,15 @@
-@import url('https://fonts.googleapis.com/css?family=Amiri');
+/*The amiri Google font is complaining about CORS*/
+/*@import url('https://fonts.googleapis.com/css?family=Amiri');*/
+@font-face {
+    font-family: Amiri;
+    font-style: normal;
+    font-weight: 400;
+    src: url('./styles/fonts/amiri-regular.woff2') format('woff2'),
+         url('./styles/fonts/amiri-regular.woff') format('woff'),
+         url('./styles/fonts/amiri-regular.ttf') format('truetype');
+}
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 @import url('https://fonts.googleapis.com/earlyaccess/notosanskannada.css');
-/*@import url("http://fonts.googleapis.com/earlyaccess/notonastaliqurdudraft.css");*/
 @import url("https://fonts.googleapis.com/earlyaccess/notonastaliqurdu.css");
 @import url("https://fonts.googleapis.com/earlyaccess/notokufiarabic.css");
 @import "./../node_modules/skeleton-css/css/normalize.css";
