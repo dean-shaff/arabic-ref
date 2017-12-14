@@ -1,8 +1,7 @@
 *.pyc
 *.txt
 *.log
-node_modules/
+client/node_modules/
 Skeleton-2.0.4.zip
-google_api.py
 sandbox/
-src/data/cred.py
+client/src/data/cred.py

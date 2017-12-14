@@ -1,6 +1,6 @@
 function Util(){
 
-    vowels = {
+    var vowels = {
         damma:"u064F",
         fatha:"u064E",
         kasra:"u0650",
@@ -17,15 +17,11 @@ function Util(){
      */
     this.removeVowelization = function(word){
         var escaped = escape(word).split("%").slice(1,)
-        // console.log(escaped)
-        // console.log(Object.values(vowels))
+        var vowelsCodes = Object.values(vowels)
         noVowels = escaped.filter((item) => {
-            let val = Object.values(vowels).indexOf(item)
-            return val == -1
+            vowelsCodes.indexOf(item) == -1
         })
         noVowels = noVowels.map(item => `%${item}`).join("")
-        // console.log(noVowels)
-        // console.log(unescape(noVowels))
         return unescape(noVowels)
     }
 
