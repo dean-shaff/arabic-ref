@@ -73,10 +73,28 @@ function App(){
                     ["eight", util.generateRowInput("mom","mom",{id:"add-word-en"})]
                 ]),
                 util.generateRow([
-                    ["eight",util.generateRowInput("ماما","ماما",{id:"add-word-ar",class:"arabic-input"})],
-                    ["four", util.generateLabel("كلمة بالعربية")]
+                    ["eight",util.generateRowInput("ماما","ماما",{id:"add-word-ar-fos7a",class:"arabic-input"})],
+                    ["four", util.generateLabel("كلمة بالعربية فصحى")]
                 ]),
-                util.generateToolTip("",{id:"extra-add-word",class:"hidden"}),
+
+                util.generateToolTip(util.concatenateRows([
+                    util.generateRow([
+                        ["eight",util.generateRowInput("ماما","ماما",{id:"add-word-ar-3mia",class:"arabic-input"})],
+                        ["four", util.generateLabel("كلمة بالعربية عامىة")]
+                    ]),
+                    util.generateRow([
+                        ["four", util.generateLabel("Keywords")],
+                        ["eight", util.generateRowInput("noun, family","")]
+                    ]),
+                    util.generateRow([
+                        ["four", util.generateLabel("Example")],
+                        ["eight", util.generateRowInput("I love my mom","")]
+                    ]),
+                    util.generateRow([
+                        ["eight", util.generateRowInput("أنا أحب ماما","",{class:"arabic-input"})],
+                        ["four", util.generateLabel("مثال")],
+                    ]),
+                ]),{id:"extra-add-word",class:"closed no-padding-no-margin"}),
                 util.generateRow([
                     ["six", util.generatePlusButton({id:"add-word-button", class:"u-full-width"})],
                     ["six", util.generateKebabButton({id:"extra-add-word-button",class:"u-full-width"})]
@@ -85,6 +103,9 @@ function App(){
         ))
         $("#toggle-add-word-form").on("click", (evt)=>{
             $("#add-word-form").toggleClass('open closed');
+        })
+        $("#extra-add-word-button").on("click", (evt)=>{
+            $("#extra-add-word").toggleClass('open closed')
         })
         $("#add-word-button").on("click", this.addWordCb(this))
     }
@@ -195,7 +216,7 @@ function App(){
 
     this.addWordCb = function(self){
         return (event) => {
-            var ar_word = $("#add-word-ar").val()
+            var ar_word = $("#add-word-ar-fos7a").val()
             var en_word = $("#add-word-en").val()
             console.log(`${ar_word}, ${en_word}`)
             var data = {
