@@ -238,7 +238,7 @@ function App(){
             console.log(`ar_example: ${ar_example}`)
             console.log(`keywords: ${keywords}`)
 
-            if (!(en_word in __en_to_ar__) && !(ar_word_fos7a in __ar_to_en__)){
+            if (!(en_word in __en_to_ar__) || !(ar_word_fos7a in __ar_to_en__)){
                 var data = {
                     ar_fos7a:ar_word_fos7a,
                     ar_3mia:ar_word_3mia,

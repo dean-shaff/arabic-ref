@@ -68,15 +68,27 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
-module.exports = __webpack_require__(6);
+module.exports = __webpack_require__(9);
 
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-window.jQuery = $ = __webpack_require__(2)
-window.octicons = __webpack_require__(3)
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_octicons__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_octicons___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_octicons__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_willis_src_willis__ = __webpack_require__(6);
+
+
+
+
+window.octicons = __WEBPACK_IMPORTED_MODULE_1_octicons___default.a
+window.$ = window.jQuery = __WEBPACK_IMPORTED_MODULE_0_jquery___default.a
+window.Willis = __WEBPACK_IMPORTED_MODULE_2__node_modules_willis_src_willis__["a" /* default */]
 
 
 /***/ }),
@@ -10513,6 +10525,278 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 /***/ }),
 /* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__config__ = __webpack_require__(8);
+
+
+
+/**
+ * Willis class for building HTML documents in javascript.
+ * The options argument is structured as follows:
+ * {
+ *      id: {String} - The id of the element
+ *      class: {String} - any additional class to give to element
+ *      style: {Object} - style argument for jquery .css method
+ * }
+ */
+class Willis{
+    constructor(){
+        this.elements = []
+        this.config = new __WEBPACK_IMPORTED_MODULE_1__config__["a" /* default */]()
+        this.defineCommonElements()
+    }
+
+    /**
+     * Process options argument
+     * @param  {[type]} options [description]
+     * @return {[type]}         [description]
+     */
+    processOptions(options){
+        if (options == undefined){
+            options = {}
+        }
+        if (!("style" in options)){
+            options.style = {}
+        }
+        return options
+    }
+
+    /**
+     * Generate HTML for a row
+     * @param  {Array} elems - An array of callbacks or strings that will be placed
+     *      in the row
+     * @param  {Object} options - options object
+     * @return {String} - Row HTML
+     */
+    row(elems, options){
+        var rowHTML = `<div class="${this.config.grid.row()}">${Object(__WEBPACK_IMPORTED_MODULE_0__util__["a" /* concatElem */])(elems)()}</div>`
+        return this.createElementCallback(rowHTML).call(this, options)
+    }
+
+    /**
+     * Generate HTML for a column
+     * @param  {String/Number} nColumns - The number of columns
+     * @param  {String/Function} content - the contents of the column
+     * @param  {Object} options - options object
+     * @return {String} - Column HTML
+     */
+    column(nColumns, content, options){
+        var columnHTML = `<div class="${this.config.grid.column(nColumns)}">${Object(__WEBPACK_IMPORTED_MODULE_0__util__["b" /* getHTMLString */])(content)}</div>`
+        return this.createElementCallback(columnHTML).call(this, options)
+    }
+
+    createElementCallback(elemHTMLorCallback){
+        var elemFactory = function(){
+            var elemHTML ;
+            var [args, options] = [...arguments]
+            if (args != undefined){
+                if (args.constructor == Object){
+                    options = args
+                }
+            }
+            options = this.processOptions(options)
+            if (elemHTMLorCallback.constructor == Function){
+                elemHTML = elemHTMLorCallback(args)
+            }else{
+                elemHTML = elemHTMLorCallback
+            }
+            var element = document.createElement("div")
+            element.innerHTML = elemHTML
+            if (element.children.length == 1){
+                element = element.children.item(0)
+                if (options.id != undefined){
+                    element.id = options.id
+                }
+                if (options.class != undefined){
+                    if (options.class.constructor == Array){
+                        options.class.forEach((newClass)=>{
+                            element.classList.add(newClass)
+                        })
+                    }else if (options.class.constructor == String){
+                        element.className += ` ${options.class}`
+                    }
+                }
+                if (options.style != undefined){
+                    Object.keys(options.style).forEach((styleAttr) => {
+                        var styleValue = options.style[styleAttr]
+                        element.style[styleAttr] = styleValue
+                    })
+                }
+                if (options.type != undefined){
+                    element.type = options.type
+                }
+                if (options.for != undefined){
+                    element.setAttribute("for", options.for)
+                }
+
+                var returnHTML = element.outerHTML
+                return returnHTML
+            }else{
+                var returnHTML = []
+                var children = element.children
+                for (var i=0; i<children.length;i++){
+                    returnHTML.push(children.item(i).outerHTML)
+                }
+                return returnHTML.join("")
+            }
+        }
+        return elemFactory
+    }
+
+    /**
+     * Add some element template
+     * Example Usage:
+     *      app.addElement("button","<button></button>")
+     * @param {String} name - name of the element that will become
+     *      an instance attribute
+     * @param {String/Function} elemHTMLorCallback - The HTML that
+     *      should go in element, or a function that returns said HTML
+     */
+    addElement(name, elemHTMLorCallback){
+        var elem = this.createElementCallback(elemHTMLorCallback)
+        this.elements.push(name)
+        this[name] = elem.bind(this)
+    }
+
+    /**
+     * Define a set of commonly used HTML elements.
+     * Right now, this defines the following HTML elements:
+     *  - div
+     *  - h1, h2, h3, h4, h5
+     *  - button
+     *  - input
+     *  - label
+     *  - input
+     * @return {null}
+     */
+    defineCommonElements(){
+        var elemFactory = (element)=>{
+            return (content) => {
+                return `<${element} class='${this.config[element].class}'>${Object(__WEBPACK_IMPORTED_MODULE_0__util__["b" /* getHTMLString */])(content)}</${element}>`
+            }
+        }
+        var elements = ["div","h1","h2","h3","h4","h5","button","label","span"]
+        elements.forEach((element)=>{
+            this.addElement(element, elemFactory(element))
+        })
+
+        this.addElement("input",([placeholder, value, type])=>{
+            if (type == undefined){
+                type="text"
+            }
+            return `<input class='${this.config.input.class}' type="${type}" placeholder="${placeholder}" value=${value}>`
+        })
+
+        this.addElement("form",([contents])=>{
+            return `<form>${Object(__WEBPACK_IMPORTED_MODULE_0__util__["b" /* getHTMLString */])(contents)}</form>`
+        })
+
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Willis;
+
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getHTMLString; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return concatElem; });
+/**
+ * Given some Array of elements, concatenated them,
+ * and return a function that will return the concatenated
+ * elements
+ * @param  {Array} elems - Array of functions of strings to
+ *      be concatenated
+ * @return {Function} - Function that will return concatenated
+ *      elements.
+ */
+var concatElem = (elems)=>{
+    var concatenated = []
+    if (elems != undefined){
+        elems.forEach((elem)=>{
+            concatenated.push(getHTMLString(elem))
+        })
+    }
+    return ()=>{
+        var returnHTML = concatenated.join("")
+        return returnHTML
+    }
+}
+
+
+/**
+ * Check if a given element is a Function.
+ * If so, call it. If the element is a String, then return the element
+ * @param  {[type]} elem [description]
+ * @return {[type]}      [description]
+ */
+var getHTMLString = (elem)=>{
+    if (elem.constructor === Function){
+        return elem()
+    }else if (elem.constructor === String){
+        return elem
+    }else if (elem.constructor === Array){
+        return concatElem(elem)()
+    }else{
+        throw `Can't process elem ${elem} with constructor ${elem.constructor}`
+    }
+}
+
+
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Config{
+    constructor(){
+        this.numberLookUp = {
+            1:"one",
+            2:"two",
+            3:"three",
+            4:"four",
+            5:"five",
+            6:"six",
+            7:"seven",
+            8:"eight",
+            9:"nine",
+            10:"ten",
+            11:"eleven",
+            12:"twelve"
+        }
+        this.grid = {
+            column:(nColumns)=>{return `${this.numberLookUp[nColumns]} columns`},
+            row:()=>{return "row"}
+        }
+        this.button = {class:""}
+        this.h1 = {class:""}
+        this.h2 = {class:""}
+        this.h3 = {class:""}
+        this.h4 = {class:""}
+        this.h5 = {class:""}
+        this.input = {class:""}
+        this.label = {class:""}
+        this.span = {class:""}
+        this.form = {class:""}
+        this.div = {class:""}
+
+
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Config;
+
+
+
+/***/ }),
+/* 9 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

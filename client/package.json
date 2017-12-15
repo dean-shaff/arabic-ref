@@ -22,6 +22,7 @@
     "jquery": "^3.2.1",
     "octicons": "^7.0.1",
     "skeleton": "^0.1.2",
-    "skeleton-css": "^2.0.4"
+    "skeleton-css": "^2.0.4",
+    "willis": "^1.0.8"
   }
 }
