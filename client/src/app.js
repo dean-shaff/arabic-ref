@@ -14,7 +14,7 @@ function App(){
                     this.resizeCb(this),
                     // this.testUi.bind(this)
                 ]
-            ),{offline:true}
+            ),{offline:false}
         )
     }
 
@@ -120,7 +120,9 @@ function App(){
                 var fos7a = arabic['fos7a'];
                 html.push(`<h5> فصحى : ${fos7a}</h5>`);
                 if ("3mia" in arabic){
-                    html.push(`<h5>عامية : ${arabic['3mia']}</h5>`);
+                    if (arabic["3mia"] !== ""){
+                        html.push(`<h5>عامية : ${arabic['3mia']}</h5>`);
+                    }
                 }
                 var index = __en_to_ar__[en_word]._id;
                 var keywords = __dict_index__[index].category
@@ -141,15 +143,23 @@ function App(){
                 if (exampleText.length > 3){
                     html.push(exampleText.join(""))
                 }
-                return html.join("");
+                var deleteId = `delete-${index}`
+                html.push(w.button("Delete word", {id:deleteId}))
+                return [html.join(""), deleteId]
             }
 
             var descripDivName = "word-description"
 
             var generateNewDescription = (callback)=>{
+                var [descriptionHTML, deleteId] = generateDescriptionHTML()
                 $(evt.currentTarget).after(
-                    w.toolTip(`${generateDescriptionHTML()}`,{id:"word-description",class:"closed"})
+                    w.toolTip(`${descriptionHTML}`,{id:"word-description",class:"closed"})
                 )
+                $(`#${deleteId}`).on("click",(evt)=>{
+                    var id = $(evt.currentTarget).attr("id").split("-").slice(-1)[0]
+                    var rev = __dict_index__[id]._rev
+                    util.removeWord([id,rev],()=>{})
+                })
                 setTimeout(()=>{
                     $(`#${descripDivName}`).toggleClass("open closed");
                     if (callback != null){
@@ -200,8 +210,8 @@ function App(){
     }
 
     this.changeFontCb = function(self){
-        return (event)=>{
-            var currentVal = $(event.currentTarget).attr("value");
+        return (evt)=>{
+            var currentVal = $(evt.currentTarget).attr("value");
             var font = self.fonts[currentVal];
             console.log(`Changing font to ${font}`)
             $("body").css("font-family", font[0], font[1])
@@ -215,8 +225,21 @@ function App(){
         }
     }
 
+    this.checkIfWordExists = function(en, ar_fos7a, ar_3mia){
+        if (en in __en_to_ar__){
+            var entry_ar = __en_to_ar__[en]
+            // console.log(`${en} in __en_to_ar__`)
+            // console.log(`entry_ar: ${JSON.stringify(entry_ar)}`)
+            // console.log(`entry_ar.fos7a: ${entry_ar["ar"]["fos7a"]}`)
+            if (ar_fos7a === entry_ar["ar"]["fos7a"] || ar_3mia === entry_ar["ar"]["3mia"]){
+                return true
+            }
+        }
+        return false
+    }
+
     this.addWordCb = function(self){
-        return (event) => {
+        return (evt) => {
             var ar_word_fos7a = $("#add-word-ar-fos7a").val()
             var ar_word_3mia = $("#add-word-ar-3mia").val()
             var en_word = $("#add-word-en").val()
@@ -231,7 +254,7 @@ function App(){
             console.log(`ar_example: ${ar_example}`)
             console.log(`keywords: ${keywords}`)
 
-            if (!(en_word in __en_to_ar__) || !(ar_word_fos7a in __ar_to_en__)){
+            if (!self.checkIfWordExists(en_word, ar_word_fos7a, ar_word_3mia)){
                 var data = {
                     ar_fos7a:ar_word_fos7a,
                     ar_3mia:ar_word_3mia,
@@ -253,6 +276,10 @@ function App(){
         }
     }
 
+    this.removeWordCb = function(self){
+        return (evt)={}
+    }
+
     this.resizeCb = function(self){
         return function(){
             var newWordListHeight = $(window).height() - $("#main-title").height();
@@ -260,6 +287,38 @@ function App(){
         }
     }
 
+    this.generateArabicEnglishWordPair = function(entry){
+        var en = entry.en
+        var ar = entry.ar
+        // Process English first
+        if (en.constructor == String){
+            enReturn = en
+        } else if (en.constructor == Array){
+            enReturn = en.join(", ")
+        }
+        // Arabic is generally a little trickier because there
+        // migth be fos7a and 3mia entries
+        if (ar.constructor == String){
+            arReturn = ar
+        }else if (ar.constructor == Object){
+            arReturn = [];
+            if ("fos7a" in ar){
+                if (ar.fos7a.constructor == Array){
+                    arReturn.push(ar.fos7a.join(", "))
+                }else{
+                    arReturn.push(ar.fos7a)
+                }
+            }
+            if ("3mia" in ar){
+                if (ar["3mia"] !== ""){
+                    arReturn.push(ar["3mia"])
+                }
+            }
+            arReturn = arReturn.join(", ")
+        }
+
+        return `${enReturn} | ${arReturn}`
+    }
 
     /**
      * Given some dictionary, generate HTML for the words in the dictionary.
@@ -269,14 +328,15 @@ function App(){
      */
     this.generateWordListHTML = function(dictionary){
         var scrollable = [];
-        Object.keys(dictionary).forEach(function(e){
-            var contents ;
-            if ("en" in dictionary[e]){
-                contents = `${dictionary[e]['en']} | ${e}`;
-            } else if ("ar" in dictionary[e]){
-                contents = `${e} | ${Object.values(dictionary[e]['ar']).join(", ")}`;
+        Object.keys(dictionary).forEach((e)=>{
+            var entry = dictionary[e]
+            if (!("en" in entry)){
+                entry.en = e
             }
-            scrollable.push(w.wordEntry(contents)) ;
+            if (!("ar" in entry)){
+                entry.ar = e
+            }
+            scrollable.push(w.wordEntry(this.generateArabicEnglishWordPair(entry))) ;
         })
         return scrollable
     }
@@ -288,38 +348,6 @@ function App(){
      */
     this.generateWordListHTMLByKeyword = function(){
 
-        var arabicEnglishWordPair = (entry) => {
-            var en = entry.en
-            var ar = entry.ar
-            // Process English first
-            if (en.constructor == String){
-                enReturn = en
-            } else if (en.constructor == Array){
-                enReturn = en.join(", ")
-            }
-            // Arabic is generally a little trickier because there
-            // migth be fos7a and 3mia entries
-            if (ar.constructor == String){
-                arReturn = ar
-            }else if (ar.constructor == Object){
-                arReturn = [];
-                if ("fos7a" in ar){
-                    if (ar.fos7a.constructor == Array){
-                        arReturn.push(ar.fos7a.join(", "))
-                    }else{
-                        arReturn.push(ar.fos7a)
-                    }
-                }
-                if ("3mia" in ar){
-                    arReturn.push(ar["3mia"])
-                }
-                arReturn = arReturn.join(", ")
-            }
-
-            return `${enReturn} | ${arReturn}`
-        }
-
-
         return () => {
             var html = [];
             Object.keys(__keywords__).forEach((keyword)=>{
@@ -327,7 +355,7 @@ function App(){
                 html.push(`<div class="float-row"><h4>${keyword}</h4></div>`)
                 wordList.forEach((index)=>{
                     var entry = __dict_index__[index]
-                    html.push(w.wordEntry(arabicEnglishWordPair(entry)));
+                    html.push(w.wordEntry(this.generateArabicEnglishWordPair(entry)));
                 })
                 html.push(`<div class="float-row"></div>`)
             })

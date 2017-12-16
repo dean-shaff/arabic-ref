@@ -169,6 +169,22 @@ function Util(){
             }
         })
     }
+
+    this.removeWord = function([id,rev], callbacks){
+        var removeWordUrl = $SCRIPT_ROOT + "/remove_word"
+        callbacks = this.processCallbacks(callbacks)
+        $.ajax({
+            type:"POST",
+            data:{data:JSON.stringify({id:id,rev:rev})},
+            url: removeWordUrl,
+            success: (data)=>{
+                callbacks.forEach((callback)=>{
+                    callback(data)
+                })
+            }
+        })
+    }
+
 }
 
 var util = new Util();
