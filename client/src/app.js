@@ -8,7 +8,6 @@ function App(){
     }
 
     this.init = function(){
-        console.log(__data_offline)
         util.getDictionaryData(
             util.processDictionary([
                     this.setupUI.bind(this),
