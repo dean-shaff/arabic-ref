@@ -48,12 +48,16 @@ function Util(){
             var arDict = {}
             var indexDict = {}
             var keywordDict = {}
-
-            dictionary.forEach((entry)=>{
-                entry = entry.doc
+            dictionary.forEach((entry, idx)=>{
+                if ("doc" in entry){
+                    entry = entry.doc
+                }
                 var ar = entry["ar"]
                 var en = entry["en"]
                 var id = entry["_id"]
+                if (id == undefined){
+                    id = idx
+                }
                 indexDict[id] = entry
                 if ("category" in entry){
                     entry["category"].forEach((cat)=>{
@@ -123,9 +127,18 @@ function Util(){
         }
     }
 
-    this.getDictionaryData = function(callbacks){
+    this.getDictionaryData = function(callbacks,options){
         var dictionaryUrl = $SCRIPT_ROOT + "/get_dictionary"
         callbacks = this.processCallbacks(callbacks)
+
+        if (options != undefined){
+            if (options.offline){
+                callbacks.forEach((callback)=>{
+                    callback(__data_offline)
+                })
+                return
+            }
+        }
         $.ajax({
             // crossDomain:true,
             type:"GET",

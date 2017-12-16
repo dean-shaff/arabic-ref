@@ -233,7 +233,8 @@ body {
     border-color:#1EAEDB;
 }*/
 
-button.plus-button{
+button.plus-button,
+button.button-plus{
     padding-right: 14px;
     padding-left: 14px;
 }
@@ -241,17 +242,20 @@ button.plus-button:hover{
     border-color: #00e500;
 }
 
+button.button-kebab.
 button.kebab-button{
     padding-right: 20px;
     padding-left: 20px;
 }
 
-button.plus-button span{
+button.plus-button span,
+button.button-plus span{
     position: relative;
     top: 4px;
 }
 
-button.kebab-button span{
+button.kebab-button span,
+button.button-kebab span{
     position: relative;
     top: 4px;
 }

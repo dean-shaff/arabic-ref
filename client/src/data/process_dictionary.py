@@ -59,12 +59,12 @@ def process_dictionary(in_path, out_path=None):
         with open(out_path, "w") as f:
             for var_name in data_js:
                 data_entry = data_js[var_name]
-                f.write("{}={}\n".format(var_name, json.dumps(data_entry)))
-
+                f.write("{}_offline={}\n".format(var_name, json.dumps(data_entry)))
+            f.write("__data_offline={}\n".format(json.dumps(data)))
     return data
 
 
 if __name__ == '__main__':
     data = process_dictionary(os.path.join(cur_dir, "dictionary.json"),
                         os.path.join(cur_dir, "dictionary.js"))
-    update_cloudant_dictionaries(data)
+    # update_cloudant_dictionaries(data)

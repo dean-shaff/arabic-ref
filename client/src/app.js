@@ -8,14 +8,14 @@ function App(){
     }
 
     this.init = function(){
-        // console.log(util.removeVowelization("ماما"))
+        console.log(__data_offline)
         util.getDictionaryData(
             util.processDictionary([
                     this.setupUI.bind(this),
                     this.resizeCb(this),
                     // this.testUi.bind(this)
                 ]
-            )
+            ),{offline:true}
         )
     }
 
@@ -34,7 +34,7 @@ function App(){
 
     this.setupSearchBox = function(){
         var self = this ;
-        $("#search-input-container").append(util.generateLabeledInput("","Search in Arabic or English...","",
+        $("#search-input-container").append(w.rowInput(["Search in Arabic or English...",""],
                                                             {id:"search-input"}))
         $("#search-input-container").on("keyup", "input#search-input",this.searchKeyDownCb(this))
 
@@ -45,7 +45,7 @@ function App(){
         $("#word-list").html(()=>{
             // var contents = self.generateWordListHTML(__ar_to_en__);
             var contents = self.generateWordListHTMLByKeyword();
-            var div = util.generateScrollableBox(contents(), {id:"word-list-contents"})()
+            var div = w.scrollableBox(contents(), {id:"word-list-contents"})
             return $(div)
                     .css("max-height", $(window).height())
                     .css("width",$("#word-list").width());
@@ -58,56 +58,50 @@ function App(){
         Object.keys(this.fonts).forEach((font)=>{
             fonts.push([font, this.fonts[font].slice(0,2).join(", ")])
         })
-        var dropdown = util.generateDropDown(fonts,{id:"font-dropdown",labelText:"Choose Font"})
-        $("#top-bar .columns").last().html(`
-            <div class="row">
-            <div class="twelve columns">
-                ${dropdown()}
-            </div>
-        </div>`)
-        util.dropDownSetup.call($("#font-dropdown"),{callback:this.changeFontCb(this)})
+        var dropdown = w.dropDown([fonts,{labelText:"Choose Font"}],{id:"font-dropdown"})
+        $("#top-bar .columns").last().html(dropdown)
+        $("#font-dropdown").dropDownSetup({callback:this.changeFontCb(this)})
     }
 
     this.setupAddWord = function(){
-        $("#add-word").append(util.generateButton("Add Word",{id:"toggle-add-word-form"}))
-        $("#add-word-form-container").html(util.generateToolTip(
-            util.concatenateRows([
-                util.generateRow([
-                    ["four", util.generateLabel("Word in English")],
-                    ["eight", util.generateRowInput("mom","",{id:"add-word-en"})]
+        $("#add-word").append(w.button("Add Word",{id:"toggle-add-word-form"}))
+        $("#add-word-form-container").html(w.toolTip([
+                w.row([
+                    w.column(4, w.label("Word in English")),
+                    w.column(8, w.rowInput(["mom",""],{id:"add-word-en"}))
                 ]),
-                util.generateRow([
-                    ["eight",util.generateRowInput("ماما","",{id:"add-word-ar-fos7a",class:"arabic-input"})],
-                    ["four", util.generateLabel("كلمة بالعربية فصحى")]
+                w.row([
+                    w.column(8,w.rowInput(["ماما",""],{id:"add-word-ar-fos7a",class:"arabic-input"})),
+                    w.column(4, w.label("كلمة بالعربية فصحى"))
                 ]),
-
-                util.generateToolTip(util.concatenateRows([
-                    util.generateRow([
-                        ["eight",util.generateRowInput("ماما","",{id:"add-word-ar-3mia",class:"arabic-input"})],
-                        ["four", util.generateLabel("كلمة بالعربية عامىة")]
+                w.toolTip([
+                    w.row([
+                        w.column(8,w.rowInput(["ماما",""],{id:"add-word-ar-3mia",class:"arabic-input"})),
+                        w.column(4, w.label("كلمة بالعربية عامىة"))
                     ]),
-                    util.generateRow([
-                        ["four", util.generateLabel("Keywords")],
-                        ["eight", util.generateRowInput("noun, family","",{id:"add-word-keywords"})]
+                    w.row([
+                        w.column(4, w.label("Keywords")),
+                        w.column(8, w.rowInput(["noun, family",""],{id:"add-word-keywords"}))
                     ]),
-                    util.generateRow([
-                        ["four", util.generateLabel("Example")],
-                        ["eight", util.generateRowInput("I love my mom","",{id:"add-word-example-en"})]
+                    w.row([
+                        w.column(4, w.label("Example")),
+                        w.column(8, w.rowInput(["I love my mom",""],{id:"add-word-example-en"}))
                     ]),
-                    util.generateRow([
-                        ["eight", util.generateRowInput("أنا أحب ماما","",{class:"arabic-input",id:"add-word-example-ar"})],
-                        ["four", util.generateLabel("مثال")],
+                    w.row([
+                        w.column(8, w.rowInput(["أنا أحب ماما",""],{class:"arabic-input",id:"add-word-example-ar"})),
+                        w.column(4, w.label("مثال")),
                     ]),
-                ]),{id:"extra-add-word",class:"closed no-padding-no-margin"}),
-                util.generateRow([
-                    ["six", util.generatePlusButton({id:"add-word-button", class:"u-full-width"})],
-                    ["six", util.generateKebabButton({id:"extra-add-word-button",class:"u-full-width"})]
+                ],{id:"extra-add-word",class:"closed no-padding-no-margin"}),
+                w.row([
+                    w.column(6, w.plusButton({id:"add-word-button", class:"u-full-width"})),
+                    w.column(6, w.kebabButton({id:"extra-add-word-button",class:"u-full-width"}))
                 ]),
-                util.generateRow([
-                    ["twelve",()=>`<h5 id="add-word-message"></h5>`]
+                w.row([
+                    w.column(12,()=>`<h5 id="add-word-message"></h5>`)
                 ])
-            ]), {id:"add-word-form",class:"add-word-form closed"}
-        ))
+            ], {id:"add-word-form",class:"add-word-form closed"})
+        )
+
         $("#toggle-add-word-form").on("click", (evt)=>{
             $("#add-word-form").toggleClass('open closed');
         })
@@ -155,7 +149,7 @@ function App(){
 
             var generateNewDescription = (callback)=>{
                 $(evt.currentTarget).after(
-                    util.generateToolTip(`${generateDescriptionHTML()}`,{id:"word-description",class:"closed"})
+                    w.toolTip(`${generateDescriptionHTML()}`,{id:"word-description",class:"closed"})
                 )
                 setTimeout(()=>{
                     $(`#${descripDivName}`).toggleClass("open closed");
@@ -283,7 +277,7 @@ function App(){
             } else if ("ar" in dictionary[e]){
                 contents = `${e} | ${Object.values(dictionary[e]['ar']).join(", ")}`;
             }
-            scrollable.push(util.generateWordEntry(contents)()) ;
+            scrollable.push(w.wordEntry(contents)) ;
         })
         return scrollable
     }
@@ -334,7 +328,7 @@ function App(){
                 html.push(`<div class="float-row"><h4>${keyword}</h4></div>`)
                 wordList.forEach((index)=>{
                     var entry = __dict_index__[index]
-                    html.push(util.generateWordEntry(arabicEnglishWordPair(entry))());
+                    html.push(w.wordEntry(arabicEnglishWordPair(entry)));
                 })
                 html.push(`<div class="float-row"></div>`)
             })
